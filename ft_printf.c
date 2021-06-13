@@ -6,14 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/12 12:28:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/13 17:29:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include "./libft/libft.h"
+#include "ft_printf.h"
 
 int	identify_flag(char c)
 {
@@ -22,11 +19,30 @@ int	identify_flag(char c)
 	signal = 0;
 	if (c == 'i')
 		signal = 1;
-	if (c == 'c')
+	else if (c == 'c')
 		signal = 2;
-	if (c == 's')
+	else if (c == 's')
 		signal = 3;
+	else if (c == 'p')
+		signal = 4;
+	else
+		signal = 0;
 	return (signal);
+}
+
+void	variable_printer(int signal, va_list x)
+{
+	if (signal == 1)
+		ft_putnbr_fd(va_arg(x, int), 1);
+	if (signal == 2)
+		ft_putchar_fd(va_arg(x, int), 1);
+	if (signal == 3)
+		ft_putstr_fd(va_arg(x, char *), 1);
+	if (signal == 4)
+	{
+		//convert hexa pointer to int, then feed int
+		ft_putnbr_base_fd((int) va_arg(x, void *), "0123456789ABCDEF", 1);
+	}
 }
 
 int read_mainstring(char **str)
@@ -59,8 +75,6 @@ int read_mainstring(char **str)
 					signal = identify_flag((*str)[i + 1]);
 	}
 	*str = ++aux;
-	if (((*str)[i]))
-		return(0);
 	return (signal);
 }
 
@@ -70,50 +84,26 @@ int	ft_printf(const char *c, ...)
 	int		signal;
 	char	*ptr;
 
-	int		integer;
-	char character;
-	char *string;
-
-	integer = 0;
 	signal = -1;
 	ptr = (char *) c;
 	if (!c)
 		return (0);
 	va_start(x, c);
-
 	while (signal)
 	{
 		signal = read_mainstring(&ptr);
 		if (signal != 0)
-		{
-			if (signal == 1)
-	{
-		integer = va_arg(x, int);
-		ft_putnbr_fd(integer, 1);
+			variable_printer(signal, x);
 	}
-	if (signal == 2)
-	{
-		character = va_arg(x, int);
-		ft_putchar_fd(character, 1);
-	}
-	if (signal == 3)
-	{
-		string = va_arg(x, char *);
-		ft_putstr_fd(string, 1);
-	}
-		}
-	}
-
-
 	va_end(x);
 	return (0);
-
-
 }
-
-
+//#include <stdio.h>
 int	main(void)
 {
-	ft_printf("char %c ", 'Z');
+	int i;
+	i = 50;
+	ft_printf("char %c int %i  el string %s y el punero %p", 'Z', i, "finito", &i);
+	//printf("\n%p\n", &i);
 	return (0);
 }
