@@ -6,15 +6,14 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/06/13 16:57:55 by guilmira         ###   ########.fr        #
+#    Updated: 2021/06/15 16:17:11 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libtfprintf.a
 
-SRCS = ft_printf.c
-#./libft/ft_putnbr_fd.c ./libft/ft_putchar_fd.c ./libft/ft_putstr_fd.c ./libft/ft_strlen.c
-SRCS_BONUS = ft_printf.c
+SRCS = main.c ft_printf.c ft_printf_utiles_flag.c
+SRCS_BONUS = ft_printf.c ft_printf_utiles_flag.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

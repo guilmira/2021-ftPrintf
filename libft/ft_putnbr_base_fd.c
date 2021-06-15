@@ -6,29 +6,16 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:19:51 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/13 17:20:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:28:39 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* static int	number_digits(int n)
-{
-	int	digits;
-
-	digits = 0;
-	while (n)
-	{
-		n /= 10;
-		digits++;
-	}
-	return (digits);
-} */
-
-void	ft_putnbr_base_fd(int n, char *base, int fd)
+void	ft_putnbr_base_fd(unsigned long long n, char *base, int fd)
 {
 	int				i;
-	unsigned int	x;
+	unsigned long long	x;
 
 	i = -1;
 	if (!base || !base[0])

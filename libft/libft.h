@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 14:43:09 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/13 16:54:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:26:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 
 //NEWS
-void	ft_putnbr_base_fd(int n, char *base, int fd);
+void	ft_putnbr_base_fd(unsigned long long n, char *base, int fd);
 
 typedef struct s_list
 {

@@ -6,104 +6,128 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/13 17:29:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/15 16:20:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	identify_flag(char c)
+static void	variable_printer(t_flag flag, va_list x)
 {
-	int signal;
+	int	integer;
+	int	lenght;
 
-	signal = 0;
-	if (c == 'i')
-		signal = 1;
-	else if (c == 'c')
-		signal = 2;
-	else if (c == 's')
-		signal = 3;
-	else if (c == 'p')
-		signal = 4;
-	else
-		signal = 0;
-	return (signal);
-}
-
-void	variable_printer(int signal, va_list x)
-{
-	if (signal == 1)
-		ft_putnbr_fd(va_arg(x, int), 1);
-	if (signal == 2)
-		ft_putchar_fd(va_arg(x, int), 1);
-	if (signal == 3)
-		ft_putstr_fd(va_arg(x, char *), 1);
-	if (signal == 4)
+	lenght = 0;
+	if (flag.signal == 'i' || flag.signal == 'd')
 	{
-		//convert hexa pointer to int, then feed int
-		ft_putnbr_base_fd((int) va_arg(x, void *), "0123456789ABCDEF", 1);
+		integer = va_arg(x, int);
+		lenght = number_digits(integer);
+		while (lenght++ < flag.total_alignment_spaces)
+			ft_putchar_fd(' ', 1);
+		ft_putnbr_fd(integer, 1);
 	}
+	else if (flag.signal == 'c')
+		ft_putchar_fd(va_arg(x, int), 1);
+	else if (flag.signal == 's')
+		ft_putstr_fd(va_arg(x, char *), 1);
+	else if (flag.signal == 'p')
+	{
+		ft_putstr_fd("0x", 1);
+		ft_putnbr_base_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1);
+	}
+	else if (flag.signal == 'u')
+	{
+	}
+	else if (flag.signal == 'x')
+	{
+	}
+	else if (flag.signal == 'X')
+	{
+	}
+	else if (flag.signal == '%') // || (flag.signal == '%' && previous == '\\')
+		ft_putchar_fd('%', 1);
 }
 
-int read_mainstring(char **str)
+static t_flag	identify_flag(char **str, t_flag flag)
 {
-	int	i;
-	int	signal;
-	char *aux;
+	int		i;
+	char	*aux;
+	int		counter_allignment;
 
-	signal = -1;
+	i = -1;
+	counter_allignment = 0;
+	aux = *str;
+	while (check_ifis_converter((*str)[++i]) != 1)
+	{
+		if (ft_isdigit((*str)[i]) && counter_allignment == 0)
+		{
+			flag.total_alignment_spaces = allignment(&(*str)[i]);
+			counter_allignment++;
+		}
+		if ((*str)[i] == '+')
+			flag.plus_sign = 1;
+		if ((*str)[i] == ' ')
+			flag.invisible_plus_sign = 1;
+		if ((*str)[i] == '0')
+			flag.zerofilled = 1;
+		if ((*str)[i] == '-')
+			flag.alignment_sign = 1;
+		aux++;
+	}
+	flag.signal	= (*str)[i];
+	*str = ++aux;
+	return (flag);
+}
+
+static t_flag	read_mainstring(char **str, t_flag flag)
+{
+	int		i;
+	char	*aux;
+
+	flag.signal = 0;
 	i = -1;
 	if (!(*str)[0])
-		return (0);
+	{
+		flag.signal = 0;
+		return (flag);
+	}
 	aux = *str;
 	while ((*str)[++i])
 	{
 		aux++;
 		if ((*str)[i] == '%')
-		{
-			if (i > 0)
-				if((*str)[i - 1] != '\\')
-					break;
-		}
+			break ;
 		else
 			ft_putchar_fd((*str)[i], 1);
 	}
-	if ((*str)[i] == '%')
+	if ((*str)[i] == '%' || (*str)[i] == '\\')
 	{
-			if (i > 0)
-				if((*str)[i - 1] != '\\')
-					signal = identify_flag((*str)[i + 1]);
+		*str = aux;
+		flag = identify_flag(str, flag);
 	}
-	*str = ++aux;
-	return (signal);
+	return (flag);
 }
 
 int	ft_printf(const char *c, ...)
 {
 	va_list	x;
-	int		signal;
 	char	*ptr;
+	t_flag	flag;
 
-	signal = -1;
-	ptr = (char *) c;
+	init_flag(&flag);
+	ptr = (char *) c; //ojo, luego vasa modificar el puntero cte c. creo que no importa x ser cte.
 	if (!c)
 		return (0);
 	va_start(x, c);
-	while (signal)
+	while (flag.signal)
 	{
-		signal = read_mainstring(&ptr);
-		if (signal != 0)
-			variable_printer(signal, x);
+		init_flag(&flag);
+		flag = read_mainstring(&ptr, flag);
+		if (flag.signal)
+		{
+			variable_printer(flag, x);
+		}
 	}
 	va_end(x);
-	return (0);
-}
-//#include <stdio.h>
-int	main(void)
-{
-	int i;
-	i = 50;
-	ft_printf("char %c int %i  el string %s y el punero %p", 'Z', i, "finito", &i);
-	//printf("\n%p\n", &i);
 	return (0);
 }
