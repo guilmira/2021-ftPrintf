@@ -1,0 +1,3 @@
+[submodule "libft_submodulo"]
+	path = libft_submodulo
+	url = https://github.com/GuilleMira/libft_submodulo.git
