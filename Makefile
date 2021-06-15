@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/06/15 16:17:11 by guilmira         ###   ########.fr        #
+#    Updated: 2021/06/15 16:36:11 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,9 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 m:
-	gcc -Wall -Wextra -Werror ./libft/libft.a $(SRCS) && ./a.out
+	gcc -Wall -Wextra -Werror ./libft_submodulo/libft.a $(SRCS) && ./a.out
 deb:
-	gcc -g -Wall -Wextra -Werror ./libft/libft.a $(SRCS)
+	gcc -g -Wall -Wextra -Werror ./libft_submodulo/libft.a $(SRCS)
 
 clean:
 	rm $(OBJS)
