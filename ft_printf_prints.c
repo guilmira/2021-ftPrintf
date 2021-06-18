@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/18 11:09:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/18 13:30:57 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_integer(int integer, t_flag flag)
 
 	change  = 0;
 	lenght = number_digits(integer);
-	if (lenght >= flag.precision_digits && lenght >= flag.total_alignment_spaces)
+	if (lenght >= flag.precision_digits && lenght >= flag.total_alignment_spaces && lenght >= flag.zerofilled)
 		;
 	else if (flag.precision_digits > lenght && flag.precision_digits >= flag.total_alignment_spaces)
 		while (lenght++ < flag.precision_digits)
@@ -43,6 +43,9 @@ void	print_integer(int integer, t_flag flag)
 				ft_putchar_fd('0', 1);
 		}
 	}
+	else if (flag.zerofilled)
+		while (lenght++ < flag.zerofilled)
+				ft_putchar_fd('0', 1);
 	else
 		while (lenght++ < flag.total_alignment_spaces)
 			ft_putchar_fd(' ', 1);
