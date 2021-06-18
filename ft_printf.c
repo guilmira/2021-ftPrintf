@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/15 16:20:14 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/18 11:58:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 static void	variable_printer(t_flag flag, va_list x)
 {
-	int	integer;
 	int	lenght;
 
 	lenght = 0;
 	if (flag.signal == 'i' || flag.signal == 'd')
-	{
-		integer = va_arg(x, int);
-		lenght = number_digits(integer);
-		while (lenght++ < flag.total_alignment_spaces)
-			ft_putchar_fd(' ', 1);
-		ft_putnbr_fd(integer, 1);
-	}
+		print_integer(va_arg(x, int), flag);
 	else if (flag.signal == 'c')
 		ft_putchar_fd(va_arg(x, int), 1);
 	else if (flag.signal == 's')
@@ -33,16 +26,19 @@ static void	variable_printer(t_flag flag, va_list x)
 	else if (flag.signal == 'p')
 	{
 		ft_putstr_fd("0x", 1);
-		ft_putnbr_base_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1);
+		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1);
 	}
 	else if (flag.signal == 'u')
 	{
+		print_integer(va_arg(x, int), flag);
 	}
 	else if (flag.signal == 'x')
 	{
+		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1);
 	}
 	else if (flag.signal == 'X')
 	{
+		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789ABCDEF", 1);
 	}
 	else if (flag.signal == '%') // || (flag.signal == '%' && previous == '\\')
 		ft_putchar_fd('%', 1);
@@ -53,25 +49,30 @@ static t_flag	identify_flag(char **str, t_flag flag)
 	int		i;
 	char	*aux;
 	int		counter_allignment;
+	int		counter_precision;
 
 	i = -1;
+	counter_precision = 0;
 	counter_allignment = 0;
 	aux = *str;
 	while (check_ifis_converter((*str)[++i]) != 1)
 	{
-		if (ft_isdigit((*str)[i]) && counter_allignment == 0)
+		if ((*str)[i] == '-')
+			flag.alignment_sign = '-';
+		if (ft_isdigit((*str)[i]) && !(counter_allignment++))
 		{
-			flag.total_alignment_spaces = allignment(&(*str)[i]);
+			flag.total_alignment_spaces = get_number_from_string(&(*str)[i]);
 			counter_allignment++;
 		}
+		if ((*str)[i] == '.')
+			if (ft_isdigit((*str)[i + 1]) && !(counter_precision++))
+				flag.precision_digits = get_number_from_string(&(*str)[i + 1]);
 		if ((*str)[i] == '+')
 			flag.plus_sign = 1;
 		if ((*str)[i] == ' ')
 			flag.invisible_plus_sign = 1;
 		if ((*str)[i] == '0')
 			flag.zerofilled = 1;
-		if ((*str)[i] == '-')
-			flag.alignment_sign = 1;
 		aux++;
 	}
 	flag.signal	= (*str)[i];
