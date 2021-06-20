@@ -6,11 +6,34 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 11:01:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 14:37:05 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	print_char(int c, t_flag *flag)
+{
+	if (flag->alignment && flag->alignment_sign == '+')
+	{
+		flag->alignment_total_spaces--;
+		while (flag->alignment_total_spaces)
+		{
+			ft_putchar_fd(' ', 1, flag);
+			flag->alignment_total_spaces--;
+		}
+	}
+	ft_putchar_fd(c, 1, flag);
+	if (flag->alignment && flag->alignment_sign == '-')
+	{
+		flag->alignment_total_spaces--;
+		while (flag->alignment_total_spaces)
+		{
+			ft_putchar_fd(' ', 1, flag);
+			flag->alignment_total_spaces--;
+		}
+	}
+}
 
 void	print_integer(int integer, t_flag *flag)
 {

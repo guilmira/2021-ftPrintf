@@ -6,11 +6,27 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 12:14:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 15:12:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void print_string(char *str, t_flag *flag)
+{
+	int	lenght;
+
+	/* lenght = ft_strlen(str);
+	if (flag->alignment && flag->alignment_sign == '+')
+	{
+		while (flag->alignment_total_spaces > lenght)
+		{
+			ft_putchar_fd(' ', 1, flag);
+			flag->alignment_total_spaces--;
+		}
+	} */
+	ft_putstr_fd(str, 1, flag);
+}
 
 /** PURPOSE : print variable on screen.
  * 1. Takes into account the details of the flag and converter.
@@ -21,12 +37,14 @@ static void	variable_printer(t_flag *flag, va_list x)
 	int	lenght;
 
 	lenght = 0;
-	if (flag->signal == 'i' || flag->signal == 'd')
-		print_integer(va_arg(x, int), flag);
-	else if (flag->signal == 'c')
-		ft_putchar_fd(va_arg(x, int), 1, flag);
+	if (flag->signal == 'c')
+		print_char(va_arg(x, int), flag);
+	else if (flag->signal == '%')
+		print_char('%', flag);
 	else if (flag->signal == 's')
-		ft_putstr_fd(va_arg(x, char *), 1, flag);
+		print_string(va_arg(x, char *), flag);
+	else if (flag->signal == 'i' || flag->signal == 'd')
+		print_integer(va_arg(x, int), flag);
 	else if (flag->signal == 'p')
 	{
 		ft_putstr_fd("0x", 1, flag);
@@ -44,8 +62,7 @@ static void	variable_printer(t_flag *flag, va_list x)
 	{
 		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789ABCDEF", 1, flag);
 	}
-	else if (flag->signal == '%') // || (flag.signal == '%' && previous == '\\')
-		ft_putchar_fd('%', 1, flag);
+
 }
 
 /** PURPOSE : identifies the signal previous to the converter.
@@ -56,6 +73,8 @@ static void	identify_flag(char *str, t_flag *flag, va_list x) //creo que no necc
 {
 	char	*precision;
 
+	if (!str[0])
+		return ;
 	get_flags(str, flag);
 	get_allignment(str, flag, x);
 	precision = ft_strchr(str, '.');

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 12:15:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 14:37:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	get_allignment(char *str, t_flag *flag, va_list x);
 void	get_precision(char *str, t_flag *flag, va_list x);
 void	advance_string(char **str, char *new_position);
 char	*get_flag_string(char *str);
+void	print_char(int c, t_flag *flag);
 
 
 int			ft_printf(const char *c, ...);

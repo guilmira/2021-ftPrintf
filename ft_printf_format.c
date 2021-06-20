@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 12:15:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 14:32:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_flags(char *str, t_flag *flag)
 		if (str[i] == '.')
 			break;
 		if (str[i] == '0' && !(ft_isdigit(str[i + 1])))
-			flag->zerofilled = get_number_from_string(&(str)[i + 1]);
+			flag->zerofilled = get_number_from_string(&(str)[i + 1]); //
 		if (str[i] == '+')
 			;
 		if (str[i] == '#')
@@ -41,7 +41,7 @@ void	get_allignment(char *str, t_flag *flag, va_list x)
 			break;
 		if (str[i] == '-')
 			flag->alignment_sign = '-';
-		if (ft_isdigit(str[i]) && !(flag->zerofilled_total_digits))
+		if (ft_isdigit(str[i]) && !(flag->alignment))
 		{
 			flag->alignment = 1;
 			flag->alignment_total_spaces = get_number_from_string(&(str)[i]);
@@ -56,6 +56,8 @@ void	get_allignment(char *str, t_flag *flag, va_list x)
 			flag->alignment_total_spaces *= -1;
 			flag->alignment_sign = '-';
 		}
+		if (flag->alignment_total_spaces == 0)
+			flag->alignment = 0;
 	}
 }
 

@@ -6,13 +6,13 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/06/20 11:35:28 by guilmira         ###   ########.fr        #
+#    Updated: 2021/06/20 13:59:51 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = main.c ft_printf.c ft_printf_utiles_flag.c ft_printf_prints.c ft_printf_format.c\
+SRCS = main.c ft_printf.c ft_printf_utiles_flag.c ft_printf_prints.c ft_printf_format.c \
 ft_lib1.c ft_lib2.c ft_lib3.c
 SRCS_BONUS = ft_printf.c ft_printf_utiles_flag.c ft_printf_prints.c
 
@@ -21,15 +21,10 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
 
-$(SRCS): $(OBJS)
-	gcc -Wall -Wextra -Werror $(SRCS)
-
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 m:
 	gcc -Wall -Wextra -Werror $(SRCS) && ./a.out
-#m:
-	#gcc -Wall -Wextra -Werror ./libft_submodulo/libft.a $(SRCS) && ./a.out
 deb:
 	gcc -g -Wall -Wextra -Werror $(SRCS)
 
@@ -38,7 +33,6 @@ clean:
 
 fclean: clean
 	rm $(NAME)
-	#rm ./a.out
 
 re: fclean all
 
