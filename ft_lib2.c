@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 10:02:57 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 08:51:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 11:39:06 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strchr_plus(char *str, char *letters)
 	}
 	if (!letters)
 		return (&str[i]);
-	return (0);
+	return (NULL);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

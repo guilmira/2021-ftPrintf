@@ -22,4 +22,6 @@ int main (void)
 	printf("%s\n", ft_strchr_plus(str, CONVERTERS));
 	advance_string(&str, ft_strchr_plus(str, CONVERTERS) + 1);
 	printf("%s\n", str);
+
+	printf("%*d buuu\n", -10, 5);
 }

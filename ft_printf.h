@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 10:12:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:15:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct s_flags
 
 
 }			t_flag;
+
+void	get_flags(char *str, t_flag *flag);
+void	get_allignment(char *str, t_flag *flag, va_list x);
+void	get_precision(char *str, t_flag *flag, va_list x);
+void	advance_string(char **str, char *new_position);
+char	*get_flag_string(char *str);
+
 
 int			ft_printf(const char *c, ...);
 int			check_ifis_converter(char c);

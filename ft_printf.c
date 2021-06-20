@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 10:22:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:14:59 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,137 +48,19 @@ static void	variable_printer(t_flag *flag, va_list x)
 		ft_putchar_fd('%', 1, flag);
 }
 
-void	get_flags(char *str, t_flag *flag)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '.')
-			break;
-		if (str[i] == '0' && !(ft_isdigit(str[i + 1])))
-			flag->zerofilled = get_number_from_string(&(str)[i + 1]);
-		if (str[i] == '+')
-			;
-		if (str[i] == '#')
-			;
-	}
-}
-
-void	get_allignment(char *str, t_flag *flag, va_list x)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '.')
-			break;
-		if (str[i] == '-')
-			flag->alignment_sign = '-';
-		if (ft_isdigit(str[i]) && !(flag->zerofilled_total_digits))
-		{
-			flag->alignment = 1;
-			flag->alignment_total_spaces = get_number_from_string(&(str)[i]);
-		}
-		if (str[i] == '*' && !(flag->alignment))
-		{
-			flag->alignment = 1;
-			flag->alignment_total_spaces = va_arg(x, int);
-		}
-	}
-}
-
-void	get_precision(char *str, t_flag *flag, va_list x)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (ft_isdigit(str[i]) && !(flag->precision))
-		{
-			flag->precision = 1;
-			flag->precision_total_digits = get_number_from_string(&(str)[i]);
-		}
-		if (str[i] == '*' && !(flag->precision))
-			flag->precision_total_digits = va_arg(x, int);
-	}
-	if (flag->precision_total_digits < 0)
-		flag->precision = 0;
-}
-
 /** PURPOSE : identifies the signal previous to the converter.
  * 1. Iterative on the flag whle is not converter (i. e: i, d, s, c ...)
  * 2. Registers in flag struct all the details of the flag.
  * */
-void	identify_flag(char *str, t_flag *flag, va_list x) //creo que no necceito retorno
+static void	identify_flag(char *str, t_flag *flag, va_list x) //creo que no necceito retorno
 {
-	int		i;
+	char	*precision;
 
-	i = -1;
 	get_flags(str, flag);
-	get_star(str, flag);
-	get_allignment(str, flag);
-	get_precision(str, flag);
-
-	while (check_ifis_converter((*str)[++i]) != 1)
-	{
-		if ((*str)[i] == '-')
-			flag->alignment_sign = '-';
-		if (ft_isdigit((*str)[i]) && !(counter_allignment) && (*str)[i] != '0')
-		{
-			flag->total_alignment_spaces = get_number_from_string(&(*str)[i]);
-			counter_allignment++;
-		}
-		if ((*str)[i] == '*' && !(counter_allignment))
-		{
-			flag->total_alignment_spaces = va_arg(x, int);
-			counter_allignment++;
-		}
-		if ((*str)[i] == '.')
-		{
-			if (ft_isdigit((*str)[i + 1]) && !(counter_precision++))
-				flag->precision_digits = get_number_from_string(&(*str)[i + 1]);
-			else if ((*str)[i + 1] == '*')
-			{
-				flag->precision_digits = va_arg(x, int);
-				counter_allignment++;
-			}
-			else
-				flag->precision_digits = -1;
-
-		}
-		if ((*str)[i] == '0')
-		{
-			flag->zerofilled = get_number_from_string(&(*str)[i + 1]);
-			if ((*str)[i + 1] == '*')
-				flag->precision_digits = va_arg(x, int);
-		}
-		if ((*str)[i] == '+')
-			flag->plus_sign = 1;
-		if ((*str)[i] == ' ')
-			flag->invisible_plus_sign = 1;
-		aux++;
-	}
-	flag->signal	= (*str)[i];
-	*str = ++aux;
-	return (*flag);
-}
-
-void advance_string(char **str, char *new_position)
-{
-	if (new_position)
-		*str = new_position;
-}
-
-char	*get_flag_string(char *str)
-{
-	if (ft_strchr_plus(str, CONVERTERS))
-		return (ft_substr(str, 0, ft_strchr_plus(str, CONVERTERS) - str));
-	else
-		return (NULL);
+	get_allignment(str, flag, x);
+	precision = ft_strchr(str, '.');
+	if (precision)
+		get_precision(precision, flag, x);
 }
 
 /** PURPOSE : to read the string passed as an argument and identify flag.
@@ -186,15 +68,16 @@ char	*get_flag_string(char *str)
  * 2. Stops at '%'
  * 3. Applies 'identify_flag'.
  * */
-static t_flag	read_mainstring(char **str, t_flag *flag, va_list x)
+static void	read_mainstring(char **str, t_flag *flag, va_list x)
 {
 	int		i;
-	char *flag_string;
+	char	*flag_string;
+	char	*provisional;
 
 	flag->signal = 0;
 	i = -1;
 	if (!(*str)[0])
-		return (*flag);
+		return ;
 	while ((*str)[++i])
 	{
 		if ((*str)[i] == '%')
@@ -202,16 +85,18 @@ static t_flag	read_mainstring(char **str, t_flag *flag, va_list x)
 		else
 			ft_putchar_fd((*str)[i], 1, flag);
 	}
-	if ((*str)[i] == '%' || (*str)[i] == '\\' && ft_strchr_plus((*str)[i + 1], CONVERTERS))
+	if (((*str)[i] == '%' || (*str)[i] == '\\') && ft_strchr_plus(&(*str)[i + 1], CONVERTERS))
 	{
-		flag_string = get_flag_string((*str)[i + 1]);
+		provisional = ft_strchr_plus(&(*str)[i + 1], CONVERTERS);
+
+		flag_string = get_flag_string(&(*str)[i + 1]);
 		identify_flag(flag_string, flag, x);
 		free (flag_string);
-		advance_string(str, (ft_strchr_plus(*str, CONVERTERS) + 1));
+		flag->signal = provisional[0];
+		advance_string(str, (ft_strchr_plus(&(*str)[i + 1], CONVERTERS) + 1));
 	}
-	else
-		advance_string(str, str + 1);
-	return (*flag);
+	//else
+		//advance_string(str, (*str) + 1);
 }
 
 /** PURPOSE : ft_printf will recreate the behavior of printf.
@@ -236,7 +121,7 @@ int	ft_printf(const char *c, ...)
 	while (flag.signal)
 	{
 		init_flag(&flag);
-		flag = read_mainstring(&ptr, &flag, x);
+		read_mainstring(&ptr, &flag, x);
 		if (flag.signal)
 			variable_printer(&flag, x); //x igual hay que pasarlo por referencia ( si va_arg lo ahces en dos funciones)
 	}
