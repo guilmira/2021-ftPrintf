@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/18 10:38:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/19 12:12:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_flag(t_flag *flag)
 	flag->signal = '9';
 	flag->alignment_sign = '+';
 	flag->total_alignment_spaces = 0;
+	flag->precision_digits = 0;
 	flag->invisible_plus_sign = 0;
 	flag->plus_sign = 0;
 	flag->zerofilled = 0;
@@ -52,6 +53,8 @@ int	number_digits(int n)
 	int	digits;
 
 	digits = 0;
+	if (n == 0)
+		return (1);
 	while (n)
 	{
 		n /= 10;
