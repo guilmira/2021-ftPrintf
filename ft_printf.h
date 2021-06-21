@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 14:37:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:33:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	get_precision(char *str, t_flag *flag, va_list x);
 void	advance_string(char **str, char *new_position);
 char	*get_flag_string(char *str);
 void	print_char(int c, t_flag *flag);
+void	print_string(char *str, t_flag *flag);
 
 
 int			ft_printf(const char *c, ...);
@@ -55,12 +56,13 @@ int			number_digits(int n);
 
 //prints
 void	print_integer(int integer, t_flag *flag);
+void	print_hexa(unsigned long long n, t_flag *flag);
 
 
 //libft
 void	ft_putstr_fd(char *s, int fd, t_flag *flag);
 void	ft_putchar_fd(char c, int fd, t_flag *flag);
-void	ft_punteropositivo_fd(unsigned long long n, char *base, int fd, t_flag *flag);
+void	ft_positivepointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
 void	ft_putnbr_fd(int n, int fd, t_flag *flag);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int c);

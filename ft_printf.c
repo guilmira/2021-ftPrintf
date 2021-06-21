@@ -6,27 +6,11 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 15:12:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:34:41 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void print_string(char *str, t_flag *flag)
-{
-	int	lenght;
-
-	/* lenght = ft_strlen(str);
-	if (flag->alignment && flag->alignment_sign == '+')
-	{
-		while (flag->alignment_total_spaces > lenght)
-		{
-			ft_putchar_fd(' ', 1, flag);
-			flag->alignment_total_spaces--;
-		}
-	} */
-	ft_putstr_fd(str, 1, flag);
-}
 
 /** PURPOSE : print variable on screen.
  * 1. Takes into account the details of the flag and converter.
@@ -46,21 +30,18 @@ static void	variable_printer(t_flag *flag, va_list x)
 	else if (flag->signal == 'i' || flag->signal == 'd')
 		print_integer(va_arg(x, int), flag);
 	else if (flag->signal == 'p')
-	{
-		ft_putstr_fd("0x", 1, flag);
-		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1, flag);
-	}
+		print_hexa((unsigned long long) va_arg(x, void *), flag);
 	else if (flag->signal == 'u')
 	{
 		print_integer(va_arg(x, int), flag);
 	}
 	else if (flag->signal == 'x')
 	{
-		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1, flag);
+		ft_positivepointer_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1, flag);
 	}
 	else if (flag->signal == 'X')
 	{
-		ft_punteropositivo_fd((unsigned long long) va_arg(x, void *), "0123456789ABCDEF", 1, flag);
+		ft_positivepointer_fd((unsigned long long) va_arg(x, void *), "0123456789ABCDEF", 1, flag);
 	}
 
 }
@@ -79,7 +60,7 @@ static void	identify_flag(char *str, t_flag *flag, va_list x) //creo que no necc
 	get_allignment(str, flag, x);
 	precision = ft_strchr(str, '.');
 	if (precision)
-		get_precision(precision, flag, x);
+		get_precision(++precision, flag, x);
 }
 
 /** PURPOSE : to read the string passed as an argument and identify flag.
@@ -114,8 +95,6 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 		flag->signal = provisional[0];
 		advance_string(str, (ft_strchr_plus(&(*str)[i + 1], CONVERTERS) + 1));
 	}
-	//else
-		//advance_string(str, (*str) + 1);
 }
 
 /** PURPOSE : ft_printf will recreate the behavior of printf.
@@ -127,24 +106,24 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 int	ft_printf(const char *c, ...)
 {
 	va_list	x;
-	t_flag	flag;
+	t_flag	*flag;
 	char	*ptr;
 
-	//flag = (*t_flag) ft_calloc(1, sizeof(*t_flag)); t_flag *flag; guardar en auxiliar, y luego lipiar aux
-	init_flag(&flag);
-	flag.counter = 0;
+	flag = ft_calloc(1, sizeof(*flag));
+	init_flag(flag);
+	flag->counter = 0;
 	ptr = (char *) c; //ojo, luego vasa modificar el puntero cte c. creo que no importa x ser cte.
 	if (!c)
 		return (0);
 	va_start(x, c);
-	while (flag.signal)
+	while (flag->signal)
 	{
-		init_flag(&flag);
-		read_mainstring(&ptr, &flag, x);
-		if (flag.signal)
-			variable_printer(&flag, x); //x igual hay que pasarlo por referencia ( si va_arg lo ahces en dos funciones)
+		init_flag(flag);
+		read_mainstring(&ptr, flag, x);
+		if (flag->signal)
+			variable_printer(flag, x); //x igual hay que pasarlo por referencia ( si va_arg lo ahces en dos funciones)
 	}
 	va_end(x);
-	//free(flag);
-	return (flag.counter);
+	free(flag);
+	return (flag->counter);
 }

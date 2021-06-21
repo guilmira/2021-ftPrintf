@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 10:02:57 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/19 11:10:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:22:36 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_putchar_fd(char c, int fd, t_flag *flag)
 	flag->counter += write(fd, &c, sizeof(char));
 }
 
-void	ft_punteropositivo_fd(unsigned long long n, char *base, int fd, t_flag *flag)
+void	ft_positivepointer_fd(unsigned long long n, char *base, int fd, t_flag *flag)
 {
 	int					i;
 	unsigned long long	x;
@@ -41,7 +41,7 @@ void	ft_punteropositivo_fd(unsigned long long n, char *base, int fd, t_flag *fla
 		ft_putchar_fd(base[x % ft_strlen(base)], fd, flag);
 	else
 	{
-		ft_punteropositivo_fd(x / ft_strlen(base), base, fd, flag);
+		ft_positivepointer_fd(x / ft_strlen(base), base, fd, flag);
 		ft_putchar_fd(base[x % ft_strlen(base)], fd, flag);
 	}
 }

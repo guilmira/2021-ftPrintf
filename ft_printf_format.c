@@ -6,12 +6,15 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 14:32:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/21 15:32:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/** STRUCTURE of printf
+ * %[parameter][flags][width][.precision][length]type
+ * */
 void	get_flags(char *str, t_flag *flag)
 {
 	int	i;
@@ -30,6 +33,10 @@ void	get_flags(char *str, t_flag *flag)
 	}
 }
 
+/** STRUCTURE of printf
+ * %[parameter][flags][width][.precision][length]type
+ * Width and allignment are synonyms
+ * */
 void	get_allignment(char *str, t_flag *flag, va_list x)
 {
 	int	i;
@@ -61,31 +68,34 @@ void	get_allignment(char *str, t_flag *flag, va_list x)
 	}
 }
 
+/** STRUCTURE of printf
+ * %[parameter][flags][width][.precision][length]type
+ * */
 void	get_precision(char *str, t_flag *flag, va_list x)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (ft_isdigit(str[i]) && !(flag->precision))
-		{
-			flag->precision = 1;
-			flag->precision_total_digits = get_number_from_string(&(str)[i]);
-		}
-		if (str[i] == '*' && !(flag->precision))
+	flag->precision++;
+	if (ft_isdigit(str[0]))
+		flag->precision_total_digits = get_number_from_string(str);
+	else if (str[0] == '*')
 			flag->precision_total_digits = va_arg(x, int);
-	}
+	else
+		flag->precision_total_digits = 0;
 	if (flag->precision_total_digits < 0)
 		flag->precision = 0;
 }
 
+/** STRUCTURE of printf
+ * %[parameter][flags][width][.precision][length]type
+ * */
 void advance_string(char **str, char *new_position)
 {
 	if (new_position)
 		*str = new_position;
 }
 
+/** PURPOSE : gets a string that only contains format values.
+ * Format values are contained between % and converter [i. e: d, s, i...]
+ * */
 char	*get_flag_string(char *str)
 {
 	if (ft_strchr_plus(str, CONVERTERS))
