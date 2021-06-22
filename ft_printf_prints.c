@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/21 16:30:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:04:34 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,56 +95,62 @@ void	print_hexa(unsigned long long n, t_flag *flag)
 	ft_positivepointer_fd(n, "0123456789abcdef", 1, flag);
 }
 
-/** PURPOSE : prints %i and % d converter
- * Takes into account: Alignment
+/** PURPOSE : prints %i and %d converter
+ * Takes into account: Alignment, precision
  * */
 void	print_integer(int integer, t_flag *flag)
 {
-	int	lenght;
-	int	change;
+	int		lenght;
+	int		sign;
+	char	*str;
+	int		i;
 
-	change  = 0;
-	lenght = number_digits(integer);
+	i = 0;
+	sign = 0;
 	if (integer < 0)
 	{
+		sign++;
 		integer *= -1;
-		ft_putchar_fd('-', 1, flag);
 	}
-	if (flag->alignment_total_spaces < 0)
+	str = ft_itoa(integer);
+	lenght = ft_strlen(str);
+	if (flag->alignment && flag->alignment_sign == '+')
 	{
-		flag->alignment_sign = '-';
-		flag->alignment_total_spaces = flag->alignment_total_spaces * -1;
-	}
-	if (lenght >= flag->precision_total_digits && lenght >= flag->alignment_total_spaces && lenght >= flag->zerofilled)
-		;
-	else if (flag->precision_total_digits > lenght && flag->precision_total_digits >= flag->alignment_total_spaces)
-		while (lenght++ < flag->precision_total_digits)
-				ft_putchar_fd('0', 1, flag);
-	else if (flag->alignment_total_spaces > flag->precision_total_digits && flag->alignment_total_spaces > lenght)
-	{
-		if (flag->alignment_sign == '-')
+		while (flag->alignment_total_spaces > lenght)
 		{
-			change++;
-			while (lenght++ < flag->precision_total_digits)
-				ft_putchar_fd('0', 1, flag);
-			ft_putnbr_fd(integer, 1, flag);
-			while (lenght++ <= flag->alignment_total_spaces)
-				ft_putchar_fd(' ', 1, flag);
-		}
-		else
-		{
-			while (flag->alignment_total_spaces > flag->precision_total_digits && flag->alignment_total_spaces-- > lenght)
-				ft_putchar_fd(' ', 1, flag);
-			while (lenght++ < flag->precision_total_digits)
-				ft_putchar_fd('0', 1, flag);
-		}
-	}
-	else if (flag->zerofilled)
-		while (lenght++ < flag->zerofilled)
-				ft_putchar_fd('0', 1, flag);
-	else
-		while (lenght++ < flag->alignment_total_spaces)
 			ft_putchar_fd(' ', 1, flag);
-	if (!change && flag->precision_total_digits >= 0)
-		ft_putnbr_fd(integer, 1, flag);
+			flag->alignment_total_spaces--;
+		}
+	}
+	if (sign == 1)
+	{
+		ft_putchar_fd('-', 1, flag);
+		sign++;
+	}
+	if (flag->precision_total_digits > lenght)
+	{
+		while (flag->precision_total_digits - lenght > 0)
+		{
+			ft_putchar_fd('0', 1, flag);
+			flag->precision_total_digits--;
+		}
+		ft_putstr_fd(str, 1, flag);
+	}
+	else if (flag->precision && !(flag->precision_total_digits))
+	{
+		;
+	}
+	else
+		ft_putstr_fd(str, 1, flag);
+	if (flag->alignment && flag->alignment_sign == '-')
+	{
+		while (flag->alignment_total_spaces > lenght)
+		{
+			ft_putchar_fd(' ', 1, flag);
+			flag->alignment_total_spaces--;
+		}
+	}
+	free(str);
+
+
 }

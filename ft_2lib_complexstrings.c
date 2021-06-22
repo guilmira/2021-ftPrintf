@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lib2.c                                          :+:      :+:    :+:   */
+/*   ft_2lib_complexstrings.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 10:02:57 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/20 11:39:06 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:45:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,19 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (((int) n * sign));
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*ptr;
+	int		i;
+
+	i = -1;
+	ptr = ft_calloc(1 + ft_strlen(s1), sizeof(*ptr));
+	if (!ptr)
+		return (NULL);
+	while (s1[++i])
+		ptr[i] = s1[i];
+	ptr[i] = '\0';
+	return (ptr);
 }
