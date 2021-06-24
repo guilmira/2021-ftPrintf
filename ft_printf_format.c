@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/21 15:32:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/24 12:00:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 /** STRUCTURE of printf
  * %[parameter][flags][width][.precision][length]type
  * */
-void	get_flags(char *str, t_flag *flag)
+void	get_flags(char *str, t_flag *flag, va_list x)
 {
 	int	i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	if (str[i] == '.')
+		return;
+	if (str[i] == '0' && !flag->zerofilled)
 	{
-		if (str[i] == '.')
-			break;
-		if (str[i] == '0' && !(ft_isdigit(str[i + 1])))
-			flag->zerofilled = get_number_from_string(&(str)[i + 1]); //
-		if (str[i] == '+')
-			;
-		if (str[i] == '#')
-			;
+		flag->zerofilled++;
+		if (str[i + 1] == '*')
+			flag->zerofilled_total_digits = va_arg(x, int);
+		else
+			flag->zerofilled_total_digits = get_number_from_string(&(str)[i + 1]);
 	}
+	if (str[i] == '+')
+		;
+	if (str[i] == '#')
+		;
 }
 
 /** STRUCTURE of printf
@@ -79,7 +82,7 @@ void	get_precision(char *str, t_flag *flag, va_list x)
 	else if (str[0] == '*')
 			flag->precision_total_digits = va_arg(x, int);
 	else
-		flag->precision_total_digits = 0;
+		flag->precision = -1; //negate precision %10.i
 	if (flag->precision_total_digits < 0)
 		flag->precision = 0;
 }

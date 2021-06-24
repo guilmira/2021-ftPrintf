@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/21 16:34:41 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/23 11:08:31 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ static void	identify_flag(char *str, t_flag *flag, va_list x) //creo que no necc
 
 	if (!str[0])
 		return ;
-	get_flags(str, flag);
-	get_allignment(str, flag, x);
+	get_flags(str, flag, x);
+	if (!flag->zerofilled)
+		get_allignment(str, flag, x);
 	precision = ft_strchr(str, '.');
 	if (precision)
 		get_precision(++precision, flag, x);

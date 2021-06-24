@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/22 15:04:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/24 14:14:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,42 @@ void	print_hexa(unsigned long long n, t_flag *flag)
 	ft_positivepointer_fd(n, "0123456789abcdef", 1, flag);
 }
 
+/** PURPOSE : only enters if precision
+ *
+ * */
+int	check_zeros_n_precision(t_flag *flag, int lenght)
+{
+	if (flag->zerofilled)
+	{
+		if (flag->zerofilled_total_digits > flag->precision_total_digits)
+		{
+			flag->alignment = 1;
+			if (flag->precision_total_digits > lenght)
+			{
+				flag->alignment_total_spaces = flag->alignment_total_spaces + (flag->zerofilled_total_digits);
+				return (flag->precision_total_digits - lenght);
+			}
+			else
+			{
+				flag->alignment_total_spaces = flag->alignment_total_spaces + (flag->zerofilled_total_digits);
+				return (0);
+			}
+		}
+		else
+		{
+			if (flag->precision_total_digits > lenght)
+				return (flag->precision_total_digits - lenght);
+			else
+				return (0);
+		}
+	}
+	else
+		return (flag->precision_total_digits - lenght);
+}
+
+
 /** PURPOSE : prints %i and %d converter
- * Takes into account: Alignment, precision
+ * Takes into account: Alignment, precision, zero filled
  * */
 void	print_integer(int integer, t_flag *flag)
 {
@@ -104,6 +138,7 @@ void	print_integer(int integer, t_flag *flag)
 	int		sign;
 	char	*str;
 	int		i;
+	int		number_zeros;
 
 	i = 0;
 	sign = 0;
@@ -112,11 +147,20 @@ void	print_integer(int integer, t_flag *flag)
 		sign++;
 		integer *= -1;
 	}
+	if (!integer && flag->precision && !flag->precision_total_digits)
+		flag->precision = -1;
 	str = ft_itoa(integer);
 	lenght = ft_strlen(str);
+	number_zeros = 0; //important definition
+	if (flag->precision)
+		number_zeros = check_zeros_n_precision(flag, lenght);
+	if (!flag->precision && flag->zerofilled)
+		number_zeros = flag->zerofilled_total_digits - lenght;
 	if (flag->alignment && flag->alignment_sign == '+')
 	{
-		while (flag->alignment_total_spaces > lenght)
+		if (sign == 1)
+			flag->alignment_total_spaces--;
+		while (flag->alignment_total_spaces > (lenght + number_zeros))
 		{
 			ft_putchar_fd(' ', 1, flag);
 			flag->alignment_total_spaces--;
@@ -127,24 +171,17 @@ void	print_integer(int integer, t_flag *flag)
 		ft_putchar_fd('-', 1, flag);
 		sign++;
 	}
-	if (flag->precision_total_digits > lenght)
+	while (number_zeros > 0)
 	{
-		while (flag->precision_total_digits - lenght > 0)
-		{
-			ft_putchar_fd('0', 1, flag);
-			flag->precision_total_digits--;
-		}
-		ft_putstr_fd(str, 1, flag);
+		ft_putchar_fd('0', 1, flag);
+		number_zeros--;
+		lenght++; //para despues tener las cifras correctas
 	}
-	else if (flag->precision && !(flag->precision_total_digits))
-	{
-		;
-	}
-	else
+	if ((!flag->precision || (flag->precision != -1)))
 		ft_putstr_fd(str, 1, flag);
 	if (flag->alignment && flag->alignment_sign == '-')
 	{
-		while (flag->alignment_total_spaces > lenght)
+		while (flag->alignment_total_spaces - lenght > 0)
 		{
 			ft_putchar_fd(' ', 1, flag);
 			flag->alignment_total_spaces--;
