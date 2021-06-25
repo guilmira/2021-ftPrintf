@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/23 11:08:31 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/25 09:39:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	ft_printf(const char *c, ...)
 		init_flag(flag);
 		read_mainstring(&ptr, flag, x);
 		if (flag->signal)
-			variable_printer(flag, x); //x igual hay que pasarlo por referencia ( si va_arg lo ahces en dos funciones)
+			variable_printer(flag, x);
 	}
 	va_end(x);
 	free(flag);
