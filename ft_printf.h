@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/23 10:46:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/29 12:32:18 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # define CONVERTERS "idcspuxX%"
+# define HEXADECIMAL "0123456789abcdef"
 
 # include <stdio.h>
 

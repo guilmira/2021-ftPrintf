@@ -1,103 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_prints.c                                 :+:      :+:    :+:   */
+/*   ft_print_3integers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/25 11:16:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/29 13:59:16 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/** PURPOSE : prints %c converter
- * Takes into account: Alignment
- * */
-void	print_char(int c, t_flag *flag)
-{
-	if (flag->alignment && flag->alignment_sign == '+')
-	{
-		flag->alignment_total_spaces--;
-		while (flag->alignment_total_spaces)
-		{
-			ft_putchar_fd(' ', 1, flag);
-			flag->alignment_total_spaces--;
-		}
-	}
-	ft_putchar_fd(c, 1, flag);
-	if (flag->alignment && flag->alignment_sign == '-')
-	{
-		flag->alignment_total_spaces--;
-		while (flag->alignment_total_spaces)
-		{
-			ft_putchar_fd(' ', 1, flag);
-			flag->alignment_total_spaces--;
-		}
-	}
-}
-
-/** PURPOSE : prints %s converter
- * Takes into account: Alignment, precision
- * */
-void print_string(char *str, t_flag *flag)
-{
-	int	lenght;
-	int	i;
-
-	i = 0;
-	if (!str)
-		lenght = 0;
-	else
-		lenght = ft_strlen(str);
-	if (flag->precision && flag->precision_total_digits < lenght)
-		lenght = flag->precision_total_digits;
-	if (flag->alignment && flag->alignment_sign == '+')
-	{
-		while (flag->alignment_total_spaces > lenght)
-		{
-			ft_putchar_fd(' ', 1, flag);
-			flag->alignment_total_spaces--;
-		}
-	}
-	if (!(flag->precision))
-		ft_putstr_fd(str, 1, flag);
-	else
-	{
-		while (flag->precision_total_digits > 0)
-		{
-			if (str[i])
-			{
-				ft_putchar_fd(str[i], 1, flag);
-				i++;
-			}
-			flag->precision_total_digits--;
-		}
-	}
-
-	if (flag->alignment && flag->alignment_sign == '-')
-	{
-		while (flag->alignment_total_spaces > lenght)
-		{
-			ft_putchar_fd(' ', 1, flag);
-			flag->alignment_total_spaces--;
-		}
-	}
-}
-
-/** PURPOSE : prints %p, %x and %X converter
- * Takes into account: Alignment
- * */
-void	print_hexa(unsigned long long n, t_flag *flag)
-{
-	ft_putstr_fd("0x", 1, flag);
-	ft_positivepointer_fd(n, "0123456789abcdef", 1, flag);
-}
-
 /** PURPOSE : to output number of zeros that must be printed
- *	1. Only enters if precision exists.
- *	2. Check all the conditions for zerofilled and precision
+ *	1. Check all the conditions for zerofilled and precision
  * */
 int	check_zeros_n_precision(t_flag *flag, int lenght)
 {
@@ -134,6 +50,8 @@ int	check_zeros_n_precision(t_flag *flag, int lenght)
 	}
 }
 
+/** PURPOSE : evaluates integer and converts it to string.
+ * */
 int	intitialize_int_print(int integer, char **str, int *lenght, t_flag *flag)
 {
 	int sign;
@@ -190,13 +108,15 @@ void	print_integer(int integer, t_flag *flag)
 		ft_putchar_fd('-', 1, flag);
 		if (flag->alignment_total_spaces > 0)
 			flag->alignment_total_spaces--;
+		/* if (number_zeros > 0)
+			number_zeros--; */
 		sign++;
 	}
 	while (number_zeros > 0)
 	{
 		ft_putchar_fd('0', 1, flag);
 		number_zeros--;
-		lenght++; //para despues tener las cifras correctas
+		lenght++;
 	}
 	if ((!flag->precision || (flag->precision != -1)))
 		ft_putstr_fd(str, 1, flag);
@@ -209,6 +129,4 @@ void	print_integer(int integer, t_flag *flag)
 		}
 	}
 	free(str);
-
-
 }

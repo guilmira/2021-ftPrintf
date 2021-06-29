@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/24 12:00:21 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/29 13:57:15 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_flags(char *str, t_flag *flag, va_list x)
 	i = 0;
 	if (str[i] == '.')
 		return;
-	if (str[i] == '0' && !flag->zerofilled)
+	if (str[i] == '0' && !flag->zerofilled && str[i + 1] != '-')
 	{
 		flag->zerofilled++;
 		if (str[i + 1] == '*')
