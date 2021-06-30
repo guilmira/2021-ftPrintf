@@ -6,12 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:32:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/22 12:34:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 11:30:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/** PURPOSE : Selects number part in any strings, trims it and applies atoi */
 int	get_number_from_string(char *number)
 {
 	int		i;
@@ -36,8 +37,12 @@ int	ft_count_digits(int n)
 	int	digits;
 
 	digits = 1;
-	while (n /= 10)
+	n /= 10;
+	while (n)
+	{
 		digits++;
+		n /= 10;
+	}
 	return (digits);
 }
 

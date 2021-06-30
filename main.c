@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:16:41 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/29 13:53:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 10:32:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 	x = 5;
 	ptr = &x;
 
-	z =    printf(" 0*%d\n", 1011);
-	j = ft_printf(" 0*%d\n", 1011);
+	z =    printf("%-9.2d\n", UINT_MAX);
+	j = ft_printf("%-9.2d\n", UINT_MAX);
 
 	//z = printf("%097i\n", 21);
 	printf("%i\n", z);

@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utiles_flag.c                            :+:      :+:    :+:   */
+/*   ft_printf_tools_flag.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/22 12:35:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 11:25:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	check_ifis_converter(char c)
-{
-	return (c == 'i' || c == 'd' || c == 'c' \
-	|| c == 's' || c == 'p' || c == 'u' \
-	|| c == 'x' || c == 'X' || c == '%');
-}
 
 /** PURPOSE : Init struct. Does not intialize counter */
 void	init_flag(t_flag *flag)
@@ -32,4 +25,16 @@ void	init_flag(t_flag *flag)
 	flag->precision_total_digits = 0;
 	flag->invisible_plus_sign = 0;
 	flag->plus_sign = 0;
+}
+
+/** PURPOSE : prints integer left part */
+void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag)
+{
+	if (flag->alignment && flag->alignment_sign == '+')
+	{
+		if (sign)
+			flag->alignment_total_spaces--;
+		while (flag->alignment_total_spaces-- > (lenght + number_zeros))
+			ft_putchar_fd(' ', 1, flag);
+	}
 }

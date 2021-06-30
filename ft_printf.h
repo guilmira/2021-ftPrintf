@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/29 12:32:18 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 11:27:01 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_flags
 
 
 }			t_flag;
-
+int		ft_printf(const char *c, ...);
 /** Memory basics */
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -62,10 +62,8 @@ int		get_number_from_string(char *number);
 int		ft_count_digits(int n);
 char	*ft_itoa(int n);
 /** Utils */
-void		init_flag(t_flag *flag);
-
-int			check_ifis_converter(char c);
-
+void	init_flag(t_flag *flag);
+void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag);
 /** Printf format */
 char	*get_flag_string(char *str);
 void	get_flags(char *str, t_flag *flag, va_list x);
@@ -75,10 +73,6 @@ void	advance_string(char **str, char *new_position);
 /** Printf prints */
 void	print_char(int c, t_flag *flag);
 void	print_string(char *str, t_flag *flag);
-void	print_integer(int integer, t_flag *flag);
 void	print_hexa(unsigned long long n, t_flag *flag);
-
-
-int		ft_printf(const char *c, ...);
-
+void	print_integer(int integer, t_flag *flag);
 #endif
