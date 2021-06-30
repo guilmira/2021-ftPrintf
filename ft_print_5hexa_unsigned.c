@@ -1,16 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_3integers.c                               :+:      :+:    :+:   */
+/*   ft_print_5hexa_unsigned.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 12:56:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 13:38:40 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void	itoa_writer_base(unsigned long long n, char *ptr, char *base)
+{
+	static int	i;
+
+	if (n / 16 != 0)
+		itoa_writer_base(n / 16, ptr, base);
+	else
+		i = 0;
+	ptr[i] = base[n % 16];
+	ptr[++i] = '\0';
+}
+
+/** PURPOSE : converts integer into its string equivalent.
+ * 1. Allocates memory in heap.
+ * 2. Calls static function itoa-writer.
+ * */
+static char	*ft_itoa_base(unsigned long long n, char *base)
+{
+	char	*ptr;
+
+	ptr = ft_calloc(ft_count_digits(n) + 2, sizeof(char));
+	if (!ptr)
+		return (NULL);
+	itoa_writer_base(n, ptr, base);
+	return (ptr);
+}
 
 /** PURPOSE : to output number of zeros that must be printed
  *	1. Check all the conditions for zerofilled and precision
@@ -30,58 +57,35 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 
 /** PURPOSE : evaluates integer and converts it to string.
  * */
-static int	intit_int(int integer, char **str, int *lenght, t_flag *flag)
+static void	intit_int(unsigned long long hexa, char **str, int *lenght, t_flag *flag, char *base)
 {
-	int	sign;
-
-	sign = 0;
-	if (integer == -2147483648)
-	{
-		sign++;
-		*str = ft_strdup("2147483648");
-	}
-	else if (integer < 0)
-	{
-		sign++;
-		integer *= -1;
-	}
 	if (!*str)
-		*str = ft_itoa(integer);
+		*str = ft_itoa_base(hexa, base);
 	*lenght = ft_strlen(*str);
-	if (!integer && flag->precision && !flag->precision_total_digits)
+	if (!hexa && flag->precision && !flag->precision_total_digits)
 	{
 		*lenght = 0;
 		flag->precision = -1;
 	}
-	return (sign);
 }
 
 /** PURPOSE : prints %i and %d converter
  * Takes into account: Alignment, precision, zero filled
  * */
-void	print_integer(int integer, t_flag *flag)
+void	print_hexa(unsigned long long hexa, t_flag *flag, char *base)
 {
 	int		lenght;
 	int		sign;
 	char	*str;
 	int		number_zeros;
 
+	sign = 0;
 	str = NULL;
-	sign = intit_int(integer, &str, &lenght, flag);
+	intit_int(hexa, &str, &lenght, flag, base);
 	number_zeros = check_zeros_n_precision(flag, lenght);
 	if (!flag->precision && flag->zerofilled && flag->alignment_sign == '+')
 		number_zeros = flag->zerofilled_total_digits - lenght;
 	left_align_int(sign, lenght, number_zeros, flag);
-	if (sign)
-	{
-		ft_putchar_fd('-', 1, flag);
-		if (flag->alignment_total_spaces > 0)
-			flag->alignment_total_spaces--;
-		if (number_zeros > 0 \
-		&& flag->precision_total_digits < flag->alignment_total_spaces \
-		&& flag->precision_total_digits < flag->zerofilled_total_digits)
-			number_zeros--;
-	}
 	print_end(number_zeros, lenght, str, flag);
 	free(str);
 }

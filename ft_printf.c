@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/28 15:03:44 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 13:32:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,16 @@ static void	variable_printer(t_flag *flag, va_list x)
 		print_char('%', flag);
 	else if (flag->signal == 's')
 		print_string(va_arg(x, char *), flag);
-	else if (flag->signal == 'i' || flag->signal == 'd')
+ 	else if (flag->signal == 'p')
+		print_pointer((unsigned long long) va_arg(x, void *), flag);
+ 	else if (flag->signal == 'i' || flag->signal == 'd')
 		print_integer(va_arg(x, int), flag);
-	else if (flag->signal == 'p')
-		print_hexa((unsigned long long) va_arg(x, void *), flag);
 	else if (flag->signal == 'u')
-	{
-		print_integer(va_arg(x, int), flag);
-	}
+		print_integer_unsigned(va_arg(x, unsigned int), flag);
 	else if (flag->signal == 'x')
-	{
-		ft_positivepointer_fd((unsigned long long) va_arg(x, void *), "0123456789abcdef", 1, flag);
-	}
+		print_hexa((unsigned long long) va_arg(x, void *), flag, HEXADECIMAL);
 	else if (flag->signal == 'X')
-	{
-		ft_positivepointer_fd((unsigned long long) va_arg(x, void *), "0123456789ABCDEF", 1, flag);
-	}
-
+		print_hexa((unsigned long long) va_arg(x, void *), flag, HEXADECIMAL_MAYUS);
 }
 
 /** PURPOSE : identifies the signal previous to the converter.

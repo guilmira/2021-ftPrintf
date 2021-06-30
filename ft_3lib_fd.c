@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lib3.c                                          :+:      :+:    :+:   */
+/*   ft_3lib_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 10:02:57 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/21 16:22:36 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/06/30 13:00:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,5 @@ void	ft_positivepointer_fd(unsigned long long n, char *base, int fd, t_flag *fla
 	{
 		ft_positivepointer_fd(x / ft_strlen(base), base, fd, flag);
 		ft_putchar_fd(base[x % ft_strlen(base)], fd, flag);
-	}
-}
-
-void	ft_putnbr_fd(int n, int fd, t_flag *flag)
-{
-	unsigned int	x;
-
-	if (n < 0)
-	{
-		x = n * -1;
-		ft_putchar_fd('-', fd, flag);
-	}
-	else
-		x = n;
-	if (x / 10 == 0)
-		ft_putchar_fd('0' + x, fd, flag);
-	else
-	{
-		ft_putnbr_fd(x / 10, fd, flag);
-		ft_putchar_fd('0' + (x % 10), fd, flag);
 	}
 }
