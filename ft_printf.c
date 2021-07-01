@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 13:32:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:49:04 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	variable_printer(t_flag *flag, va_list x)
 	else if (flag->signal == 'u')
 		print_integer_unsigned(va_arg(x, unsigned int), flag);
 	else if (flag->signal == 'x')
-		print_hexa((unsigned long long) va_arg(x, void *), flag, HEXADECIMAL);
+		print_hexa(va_arg(x, unsigned int), flag, HEXADECIMAL);
 	else if (flag->signal == 'X')
-		print_hexa((unsigned long long) va_arg(x, void *), flag, HEXADECIMAL_MAYUS);
+		print_hexa(va_arg(x, unsigned int), flag, HEXADECIMAL_MAYUS);
 }
 
 /** PURPOSE : identifies the signal previous to the converter.

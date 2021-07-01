@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_5hexa_unsigned.c                          :+:      :+:    :+:   */
+/*   ft_print_5hexa.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 13:38:40 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:54:20 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	itoa_writer_base(unsigned long long n, char *ptr, char *base)
 {
 	static int	i;
 
-	if (n / 16 != 0)
+	if (n / 16)
 		itoa_writer_base(n / 16, ptr, base);
 	else
 		i = 0;
@@ -72,7 +72,7 @@ static void	intit_int(unsigned long long hexa, char **str, int *lenght, t_flag *
 /** PURPOSE : prints %i and %d converter
  * Takes into account: Alignment, precision, zero filled
  * */
-void	print_hexa(unsigned long long hexa, t_flag *flag, char *base)
+void	print_hexa(unsigned int hexa, t_flag *flag, char *base)
 {
 	int		lenght;
 	int		sign;

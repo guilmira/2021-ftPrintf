@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 12:35:16 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 10:46:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/01 12:37:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ void	print_string(char *str, t_flag *flag)
 
 	i = 0;
 	if (!str)
-		lenght = 0;
-	else
-		lenght = ft_strlen(str);
+		str = "(null)";
+	lenght = ft_strlen(str);
 	if (flag->precision && flag->precision_total_digits < lenght)
 		lenght = flag->precision_total_digits;
 	if (flag->alignment && flag->alignment_sign == '+')

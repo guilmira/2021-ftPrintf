@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 13:30:23 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:54:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void	print_string(char *str, t_flag *flag);
 void	print_pointer(unsigned long long n, t_flag *flag);
 void	print_integer(int integer, t_flag *flag);
 void	print_integer_unsigned(unsigned int integer, t_flag *flag);
-void	print_hexa(unsigned long long hexa, t_flag *flag, char *base);
+void	print_hexa(unsigned int hexa, t_flag *flag, char *base);
 
 #endif
