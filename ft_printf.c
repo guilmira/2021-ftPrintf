@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/01 13:49:04 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:02:45 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 
 		flag_string = get_flag_string(&(*str)[i + 1]);
 		identify_flag(flag_string, flag, x);
-		free (flag_string);
+		if (flag_string)
+			free (flag_string);
 		flag->signal = provisional[0];
 		advance_string(str, (ft_strchr_plus(&(*str)[i + 1], CONVERTERS) + 1));
 	}
@@ -102,6 +103,7 @@ int	ft_printf(const char *c, ...)
 	va_list	x;
 	t_flag	*flag;
 	char	*ptr;
+	int		result;
 
 	flag = ft_calloc(1, sizeof(*flag));
 	init_flag(flag);
@@ -118,6 +120,7 @@ int	ft_printf(const char *c, ...)
 			variable_printer(flag, x);
 	}
 	va_end(x);
+	result = flag->counter;
 	free(flag);
-	return (flag->counter);
+	return (result);
 }

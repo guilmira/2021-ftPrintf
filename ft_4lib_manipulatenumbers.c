@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:32:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 12:39:03 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:46:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ int	get_number_from_string(char *number)
 
 /** PURPOSE : counts digits of an int (iterative) */
 int	ft_count_digits(int n)
+{
+	int	digits;
+
+	digits = 1;
+	n /= 10;
+	while (n)
+	{
+		digits++;
+		n /= 10;
+	}
+	return (digits);
+}
+
+/** PURPOSE : counts digits of an unsigned int (iterative) */
+int	ft_count_digits_unsigned(unsigned int n)
 {
 	int	digits;
 

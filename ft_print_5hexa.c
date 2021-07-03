@@ -6,13 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/01 13:54:20 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:46:47 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	itoa_writer_base(unsigned long long n, char *ptr, char *base)
+static void	itoa_writer_base(unsigned int n, char *ptr, char *base)
 {
 	static int	i;
 
@@ -28,11 +28,11 @@ static void	itoa_writer_base(unsigned long long n, char *ptr, char *base)
  * 1. Allocates memory in heap.
  * 2. Calls static function itoa-writer.
  * */
-static char	*ft_itoa_base(unsigned long long n, char *base)
+static char	*ft_itoa_base(unsigned int n, char *base)
 {
 	char	*ptr;
 
-	ptr = ft_calloc(ft_count_digits(n) + 2, sizeof(char));
+	ptr = ft_calloc(ft_count_digits_unsigned(n) + 2, sizeof(char));
 	if (!ptr)
 		return (NULL);
 	itoa_writer_base(n, ptr, base);
@@ -57,7 +57,7 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 
 /** PURPOSE : evaluates integer and converts it to string.
  * */
-static void	intit_int(unsigned long long hexa, char **str, int *lenght, t_flag *flag, char *base)
+static void	intit_int(unsigned int hexa, char **str, int *lenght, t_flag *flag, char *base)
 {
 	if (!*str)
 		*str = ft_itoa_base(hexa, base);

@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/07/01 13:19:31 by guilmira         ###   ########.fr        #
+#    Updated: 2021/07/03 15:36:24 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 m:
 	gcc -Wall -Wextra -Werror $(SRCS) && ./a.out
+s:
+	gcc  $(SRCS) -fsanitize=address
 deb:
 	gcc -g -Wall -Wextra -Werror $(SRCS)
 k:

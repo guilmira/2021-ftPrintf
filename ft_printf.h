@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/01 13:54:42 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:46:30 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_positivepointer_fd(unsigned long long n, char *base, int fd, t_flag *fla
 /** Manipulate_numbers */
 int		get_number_from_string(char *number);
 int		ft_count_digits(int n);
+int		ft_count_digits_unsigned(unsigned int n);
 char	*ft_itoa(int n);
 /** Utils */
 void	init_flag(t_flag *flag);

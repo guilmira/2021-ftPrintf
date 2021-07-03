@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 12:56:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:44:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*ft_itoa_unsigned(unsigned int n)
 {
 	char	*ptr;
 
-	ptr = ft_calloc(ft_count_digits(n) + 2, sizeof(char));
+	ptr = ft_calloc(ft_count_digits_unsigned(n) + 2, sizeof(char));
 	if (!ptr)
 		return (NULL);
 	itoa_writer_unsigned(n, ptr);
