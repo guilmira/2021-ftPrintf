@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 12:55:09 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:58:53 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	init_flag(t_flag *flag)
 	flag->alignment_total_spaces = 0;
 	flag->precision = 0;
 	flag->precision_total_digits = 0;
-	flag->invisible_plus_sign = 0;
+	flag->invisible_sign = 0;
 	flag->plus_sign = 0;
+	flag->alternative = 0;
 }
 
 /** PURPOSE : prints integer and unsigned integer left part */
@@ -32,11 +33,17 @@ void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag)
 {
 	if (flag->alignment && flag->alignment_sign == '+')
 	{
+		if (!sign && (flag->plus_sign || flag->invisible_sign) && (flag->signal == 'i' && flag->signal == 'd'))
+			flag->alignment_total_spaces--;
 		if (sign)
 			flag->alignment_total_spaces--;
 		while (flag->alignment_total_spaces-- > (lenght + number_zeros))
 			ft_putchar_fd(' ', 1, flag);
 	}
+	if (!sign && flag->invisible_sign && (flag->signal == 'i' && flag->signal == 'd'))
+		ft_putchar_fd(' ', 1, flag);
+	if (!sign && flag->plus_sign && (flag->signal == 'i' && flag->signal == 'd'))
+		ft_putchar_fd('+', 1, flag);
 }
 
 /** PURPOSE : print end part for %d, %i and %u

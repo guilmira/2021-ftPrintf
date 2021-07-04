@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:32:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/03 15:46:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 13:32:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	itoa_writer(int n, char *ptr)
 
 /** PURPOSE : converts integer into its string equivalent.
  * 1. Allocates memory in heap.
- * 2. Calls static function itoa-writer.
+ * 2. Calls recursive function itoa-writer.
  * */
 char	*ft_itoa(int n)
 {

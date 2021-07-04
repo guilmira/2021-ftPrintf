@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/03 15:02:45 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 13:53:58 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	variable_printer(t_flag *flag, va_list x)
 		print_char('%', flag);
 	else if (flag->signal == 's')
 		print_string(va_arg(x, char *), flag);
- 	else if (flag->signal == 'p')
+	else if (flag->signal == 'p')
 		print_pointer((unsigned long long) va_arg(x, void *), flag);
- 	else if (flag->signal == 'i' || flag->signal == 'd')
+	else if (flag->signal == 'i' || flag->signal == 'd')
 		print_integer(va_arg(x, int), flag);
 	else if (flag->signal == 'u')
 		print_integer_unsigned(va_arg(x, unsigned int), flag);
@@ -43,7 +43,7 @@ static void	variable_printer(t_flag *flag, va_list x)
  * 1. Iterative on the flag whle is not converter (i. e: i, d, s, c ...)
  * 2. Registers in flag struct all the details of the flag.
  * */
-static void	identify_flag(char *str, t_flag *flag, va_list x) //creo que no necceito retorno
+static void	identify_flag(char *str, t_flag *flag, va_list x)
 {
 	char	*precision;
 
@@ -79,10 +79,9 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 		else
 			ft_putchar_fd((*str)[i], 1, flag);
 	}
-	if (((*str)[i] == '%' || (*str)[i] == '\\') && ft_strchr_plus(&(*str)[i + 1], CONVERTERS))
+	if ((*str)[i] == '%' && ft_strchr_plus(&(*str)[i + 1], CONVERTERS))
 	{
 		provisional = ft_strchr_plus(&(*str)[i + 1], CONVERTERS);
-
 		flag_string = get_flag_string(&(*str)[i + 1]);
 		identify_flag(flag_string, flag, x);
 		if (flag_string)
@@ -93,7 +92,7 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 }
 
 /** PURPOSE : ft_printf will recreate the behavior of printf.
- * The funct. recieves a varying number of arguments and varying types. Then prints. Iterative.
+ * Recieves a varying number of arguments and types. Then prints. Iterative.
  * 1. Read argument.
  * 2. Define the flag.
  * 3. Print the argument.
@@ -108,7 +107,7 @@ int	ft_printf(const char *c, ...)
 	flag = ft_calloc(1, sizeof(*flag));
 	init_flag(flag);
 	flag->counter = 0;
-	ptr = (char *) c; //ojo, luego vasa modificar el puntero cte c. creo que no importa x ser cte.
+	ptr = (char *) c;
 	if (!c)
 		return (0);
 	va_start(x, c);

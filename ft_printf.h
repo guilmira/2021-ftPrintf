@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 12:53:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:33:50 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ typedef struct s_flags
 	int		alignment_total_spaces;
 	int		precision;
 	int		precision_total_digits;
-
-	int		invisible_plus_sign; // el espacio
-	int		plus_sign;	// +
-
+	int		invisible_sign;
+	int		plus_sign;
+	int		alternative;
 	int		counter;
-
-
 }			t_flag;
+
 int		ft_printf(const char *c, ...);
 /** Memory basics */
 void	*ft_memset(void *b, int c, size_t len);
@@ -55,7 +53,7 @@ char	*ft_strdup(const char *s1);
 /** Fd management */
 void	ft_putstr_fd(char *s, int fd, t_flag *flag);
 void	ft_putchar_fd(char c, int fd, t_flag *flag);
-void	ft_positivepointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
+void	ft_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
 /** Manipulate_numbers */
 int		get_number_from_string(char *number);
 int		ft_count_digits(int n);
@@ -80,7 +78,7 @@ void	print_char(int c, t_flag *flag);
 void	print_string(char *str, t_flag *flag);
 void	print_pointer(unsigned long long n, t_flag *flag);
 void	print_integer(int integer, t_flag *flag);
-void	print_integer_unsigned(unsigned int integer, t_flag *flag);
+void	print_integer_unsigned(unsigned int unsig, t_flag *flag);
 void	print_hexa(unsigned int hexa, t_flag *flag, char *base);
 
 #endif

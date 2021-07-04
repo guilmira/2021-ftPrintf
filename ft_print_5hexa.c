@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/03 15:46:47 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 15:03:11 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,18 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 
 /** PURPOSE : evaluates integer and converts it to string.
  * */
-static void	intit_int(unsigned int hexa, char **str, int *lenght, t_flag *flag, char *base)
+static char	*init_hexa(unsigned int hexa, int *lenght, t_flag *flag, char *base)
 {
-	if (!*str)
-		*str = ft_itoa_base(hexa, base);
-	*lenght = ft_strlen(*str);
+	char	*str;
+
+	str = ft_itoa_base(hexa, base);
+	*lenght = ft_strlen(str);
 	if (!hexa && flag->precision && !flag->precision_total_digits)
 	{
 		*lenght = 0;
 		flag->precision = -1;
 	}
+	return (str);
 }
 
 /** PURPOSE : prints %i and %d converter
@@ -79,13 +81,16 @@ void	print_hexa(unsigned int hexa, t_flag *flag, char *base)
 	char	*str;
 	int		number_zeros;
 
+	if (flag->alternative && flag->alignment_sign == '+')
+		flag->alignment_total_spaces -= 2;
 	sign = 0;
-	str = NULL;
-	intit_int(hexa, &str, &lenght, flag, base);
+	str = init_hexa(hexa, &lenght, flag, base);
 	number_zeros = check_zeros_n_precision(flag, lenght);
 	if (!flag->precision && flag->zerofilled && flag->alignment_sign == '+')
 		number_zeros = flag->zerofilled_total_digits - lenght;
 	left_align_int(sign, lenght, number_zeros, flag);
+	if (flag->alternative)
+		ft_putstr_fd("0x", 1, flag);
 	print_end(number_zeros, lenght, str, flag);
 	free(str);
 }

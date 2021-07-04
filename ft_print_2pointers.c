@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 12:31:24 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/01 14:16:34 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 13:28:52 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_pointer(unsigned long long n, t_flag *flag)
 	if (flag->alignment && flag->alignment_sign == '+')
 		print_left_allignment(lenght_of_hexadecimal, flag);
 	ft_putstr_fd("0x", 1, flag);
-	ft_positivepointer_fd(n, HEXADECIMAL, 1, flag);
+	ft_pointer_fd(n, HEXADECIMAL, 1, flag);
 	if (flag->alignment_sign == '-')
 		print_right_allignment(lenght_of_hexadecimal, flag);
 }

@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/07/03 15:36:24 by guilmira         ###   ########.fr        #
+#    Updated: 2021/07/04 14:09:34 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,9 @@ clean:
 
 fclean: clean
 	rm $(NAME)
+
+normi:
+	norminette $(SRCS)
 
 re: fclean all
 

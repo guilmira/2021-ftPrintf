@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 12:29:19 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:33:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,34 @@ void	get_flags(char *str, t_flag *flag, va_list x)
 
 	i = 0;
 	if (str[i] == '.')
-		return;
+		return ;
 	if (str[i] == '0' && !flag->zerofilled && str[i + 1] != '-')
 	{
 		flag->zerofilled++;
 		if (str[i + 1] == '*')
 			flag->zerofilled_total_digits = va_arg(x, int);
 		else
-			flag->zerofilled_total_digits = get_number_from_string(&(str)[i + 1]);
+			flag->zerofilled_total_digits = \
+			get_number_from_string(&(str)[i + 1]);
 	}
+	if (str[i] == ' ')
+		flag->invisible_sign++;
 	if (str[i] == '+')
-		;
+		flag->plus_sign++;
 	if (str[i] == '#')
-		;
+		flag->alternative++;
+}
+
+/** PURPOSE : in case that the alignnment is < 0, check and correct. **/
+static void	correct_alignment(t_flag *flag)
+{
+	if (flag->alignment_total_spaces < 0)
+	{
+		flag->alignment_total_spaces *= -1;
+		flag->alignment_sign = '-';
+	}
+	if (flag->alignment_total_spaces == 0)
+		flag->alignment = 0;
 }
 
 /** STRUCTURE of printf
@@ -48,26 +63,21 @@ void	get_allignment(char *str, t_flag *flag, va_list x)
 	while (str[++i])
 	{
 		if (str[i] == '.')
-			break;
+			break ;
 		if (str[i] == '-')
 			flag->alignment_sign = '-';
 		if (ft_isdigit(str[i]) && !(flag->alignment))
 		{
-			flag->alignment = 1;
+			flag->alignment++;
 			flag->alignment_total_spaces = get_number_from_string(&(str)[i]);
 		}
 		if (str[i] == '*' && !(flag->alignment))
 		{
-			flag->alignment = 1;
+			flag->alignment++;
 			flag->alignment_total_spaces = va_arg(x, int);
 		}
-		if (flag->alignment_total_spaces < 0)
-		{
-			flag->alignment_total_spaces *= -1;
-			flag->alignment_sign = '-';
-		}
-		if (flag->alignment_total_spaces == 0)
-			flag->alignment = 0;
+		if (flag->alignment_total_spaces < 1)
+			correct_alignment(flag);
 	}
 }
 
@@ -80,9 +90,9 @@ void	get_precision(char *str, t_flag *flag, va_list x)
 	if (ft_isdigit(str[0]))
 		flag->precision_total_digits = get_number_from_string(str);
 	else if (str[0] == '*')
-			flag->precision_total_digits = va_arg(x, int);
+		flag->precision_total_digits = va_arg(x, int);
 	else
-		flag->precision = -1; //negate precision %10.i (seria -1)
+		flag->precision = -1;
 	if (flag->precision_total_digits < 0)
 		flag->precision = 0;
 }
@@ -90,7 +100,7 @@ void	get_precision(char *str, t_flag *flag, va_list x)
 /** STRUCTURE of printf
  * %[parameter][flags][width][.precision][length]type
  * */
-void advance_string(char **str, char *new_position)
+void	advance_string(char **str, char *new_position)
 {
 	if (new_position)
 		*str = new_position;

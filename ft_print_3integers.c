@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 13:19:13 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:42:44 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 
 /** PURPOSE : evaluates integer and converts it to string.
  * */
-static int	intit_int(int integer, char **str, int *lenght, t_flag *flag)
+static int	init_int(int integer, char **str, int *lenght, t_flag *flag)
 {
 	int	sign;
 
@@ -67,7 +67,7 @@ void	print_integer(int integer, t_flag *flag)
 	int		number_zeros;
 
 	str = NULL;
-	sign = intit_int(integer, &str, &lenght, flag);
+	sign = init_int(integer, &str, &lenght, flag);
 	number_zeros = check_zeros_n_precision(flag, lenght);
 	if (!flag->precision && flag->zerofilled && flag->alignment_sign == '+')
 		number_zeros = flag->zerofilled_total_digits - lenght;

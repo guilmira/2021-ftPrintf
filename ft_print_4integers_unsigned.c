@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/03 15:44:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 13:45:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 
 /** PURPOSE : evaluates integer and converts it to string.
  * */
-static void	intit_int(unsigned int integer, char **str, int *lenght, t_flag *flag)
+static void	init_unsig(unsigned int unsig, char **str, \
+int *lenght, t_flag *flag)
 {
 	if (!*str)
-		*str = ft_itoa_unsigned(integer);
+		*str = ft_itoa_unsigned(unsig);
 	*lenght = ft_strlen(*str);
-	if (!integer && flag->precision && !flag->precision_total_digits)
+	if (!unsig && flag->precision && !flag->precision_total_digits)
 	{
 		*lenght = 0;
 		flag->precision = -1;
@@ -72,7 +73,7 @@ static void	intit_int(unsigned int integer, char **str, int *lenght, t_flag *fla
 /** PURPOSE : prints %i and %d converter
  * Takes into account: Alignment, precision, zero filled
  * */
-void	print_integer_unsigned(unsigned int integer, t_flag *flag)
+void	print_integer_unsigned(unsigned int unsig, t_flag *flag)
 {
 	int		lenght;
 	int		sign;
@@ -81,7 +82,7 @@ void	print_integer_unsigned(unsigned int integer, t_flag *flag)
 
 	sign = 0;
 	str = NULL;
-	intit_int(integer, &str, &lenght, flag);
+	init_unsig(unsig, &str, &lenght, flag);
 	number_zeros = check_zeros_n_precision(flag, lenght);
 	if (!flag->precision && flag->zerofilled && flag->alignment_sign == '+')
 		number_zeros = flag->zerofilled_total_digits - lenght;
