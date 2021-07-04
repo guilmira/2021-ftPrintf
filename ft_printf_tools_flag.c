@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 12:56:49 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 12:55:09 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	print_end(int number_zeros, int lenght, char *str, t_flag *flag)
 		number_zeros--;
 		lenght++;
 	}
-	if ((!flag->precision || (flag->precision != -1)))
+	if (!ft_strncmp("0", str, 1) && flag->precision == -1)
+		;
+	else
 		ft_putstr_fd(str, 1, flag);
 	if (flag->alignment && flag->alignment_sign == '-')
 		while (flag->alignment_total_spaces-- - lenght > 0)
@@ -84,4 +86,21 @@ int	check_flag_zerofilled(t_flag *flag, int lenght)
 		else
 			return (0);
 	}
+}
+
+/** PURPOSE : compares strings up to n char
+ * Returns character difference.
+ */
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (s1[i] != s2[i] || !s1[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		i++;
+	}
+	return (0);
 }

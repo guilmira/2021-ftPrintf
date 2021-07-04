@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/29 13:57:15 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 12:29:19 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	get_precision(char *str, t_flag *flag, va_list x)
 	else if (str[0] == '*')
 			flag->precision_total_digits = va_arg(x, int);
 	else
-		flag->precision = -1; //negate precision %10.i
+		flag->precision = -1; //negate precision %10.i (seria -1)
 	if (flag->precision_total_digits < 0)
 		flag->precision = 0;
 }

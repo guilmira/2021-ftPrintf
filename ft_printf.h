@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/03 15:46:30 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 12:53:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	init_flag(t_flag *flag);
 void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag);
 void	print_end(int number_zeros, int lenght, char *str, t_flag *flag);
 int		check_flag_zerofilled(t_flag *flag, int lenght);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /** Printf format */
 char	*get_flag_string(char *str);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/06/30 12:56:59 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/04 13:19:13 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	print_integer(int integer, t_flag *flag)
 		if (flag->alignment_total_spaces > 0)
 			flag->alignment_total_spaces--;
 		if (number_zeros > 0 \
-		&& flag->precision_total_digits < flag->alignment_total_spaces \
+		&& flag->precision_total_digits <= flag->alignment_total_spaces \
 		&& flag->precision_total_digits < flag->zerofilled_total_digits)
 			number_zeros--;
 	}
