@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 13:53:58 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:29:21 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	variable_printer(t_flag *flag, va_list x)
 	else if (flag->signal == 'u')
 		print_integer_unsigned(va_arg(x, unsigned int), flag);
 	else if (flag->signal == 'x')
-		print_hexa(va_arg(x, unsigned int), flag, HEXADECIMAL);
+		print_hexa(va_arg(x, unsigned int), flag, HEXADECIMAL, PREFIX);
 	else if (flag->signal == 'X')
-		print_hexa(va_arg(x, unsigned int), flag, HEXADECIMAL_MAYUS);
+		print_hexa(va_arg(x, unsigned int), flag, HEXADECIMAL_MAYUS, PREFIX_MAYUS);
 }
 
 /** PURPOSE : identifies the signal previous to the converter.
@@ -50,6 +50,8 @@ static void	identify_flag(char *str, t_flag *flag, va_list x)
 	if (!str[0])
 		return ;
 	get_flags(str, flag, x);
+	if (flag->alternative || flag->invisible_sign || flag->plus_sign)
+		get_flags(str + 1, flag, x);
 	if (!flag->zerofilled)
 		get_allignment(str, flag, x);
 	precision = ft_strchr(str, '.');
@@ -66,7 +68,7 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 {
 	int		i;
 	char	*flag_string;
-	char	*provisional;
+	char	*converter;
 
 	flag->signal = 0;
 	i = -1;
@@ -81,12 +83,12 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 	}
 	if ((*str)[i] == '%' && ft_strchr_plus(&(*str)[i + 1], CONVERTERS))
 	{
-		provisional = ft_strchr_plus(&(*str)[i + 1], CONVERTERS);
+		converter = ft_strchr_plus(&(*str)[i + 1], CONVERTERS);
 		flag_string = get_flag_string(&(*str)[i + 1]);
 		identify_flag(flag_string, flag, x);
 		if (flag_string)
 			free (flag_string);
-		flag->signal = provisional[0];
+		flag->signal = converter[0];
 		advance_string(str, (ft_strchr_plus(&(*str)[i + 1], CONVERTERS) + 1));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 15:03:11 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/05 14:52:08 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ static char	*init_hexa(unsigned int hexa, int *lenght, t_flag *flag, char *base)
 /** PURPOSE : prints %i and %d converter
  * Takes into account: Alignment, precision, zero filled
  * */
-void	print_hexa(unsigned int hexa, t_flag *flag, char *base)
+void	print_hexa(unsigned int hexa, t_flag *flag, char *base, char *prefix)
 {
 	int		lenght;
 	int		sign;
 	char	*str;
 	int		number_zeros;
 
-	if (flag->alternative && flag->alignment_sign == '+')
+	if (flag->alternative && flag->alignment_sign == '+' && hexa)
 		flag->alignment_total_spaces -= 2;
 	sign = 0;
 	str = init_hexa(hexa, &lenght, flag, base);
@@ -89,8 +89,16 @@ void	print_hexa(unsigned int hexa, t_flag *flag, char *base)
 	if (!flag->precision && flag->zerofilled && flag->alignment_sign == '+')
 		number_zeros = flag->zerofilled_total_digits - lenght;
 	left_align_int(sign, lenght, number_zeros, flag);
-	if (flag->alternative)
-		ft_putstr_fd("0x", 1, flag);
+	if (flag->alternative && hexa)
+	{
+		ft_putstr_fd(prefix, 1, flag);
+		if (flag->precision_total_digits < flag->zerofilled_total_digits)
+		{
+			number_zeros -= 2;
+
+		}
+		flag->alignment_total_spaces -= 2;
+	}
 	print_end(number_zeros, lenght, str, flag);
 	free(str);
 }

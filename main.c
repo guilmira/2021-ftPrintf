@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:16:41 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 15:28:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:19:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 int	main(void)
 {
-	int	i = 53;
-	char *s = "%*.5i|\n";
-	printf(s, i);
-	ft_printf(s, i);
+	char *s = "%ld\n";
+	int t = printf(s, 1);
+	int j = ft_printf(s, 1);
+	ft_printf("%i\n", t);
+	ft_printf("%i\n", j);
 	return (0);
 }
 //system("leaks a.out");

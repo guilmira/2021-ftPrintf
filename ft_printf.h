@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 14:33:50 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:29:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define CONVERTERS "idcspuxX%"
 # define HEXADECIMAL "0123456789abcdef"
 # define HEXADECIMAL_MAYUS "0123456789ABCDEF"
+# define PREFIX "0x"
+# define PREFIX_MAYUS "0X"
 
 # include <stdio.h>
 
@@ -34,6 +36,7 @@ typedef struct s_flags
 	int		invisible_sign;
 	int		plus_sign;
 	int		alternative;
+	int		l;
 	int		counter;
 }			t_flag;
 
@@ -79,6 +82,8 @@ void	print_string(char *str, t_flag *flag);
 void	print_pointer(unsigned long long n, t_flag *flag);
 void	print_integer(int integer, t_flag *flag);
 void	print_integer_unsigned(unsigned int unsig, t_flag *flag);
-void	print_hexa(unsigned int hexa, t_flag *flag, char *base);
+void	print_hexa(unsigned int hexa, t_flag *flag, char *base, char *prefix);
+void	print_long(long long long_int, t_flag *flag);
+
 
 #endif
