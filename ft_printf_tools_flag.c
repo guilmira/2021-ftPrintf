@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/05 15:29:27 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:29:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag)
 {
 	if (flag->alignment && flag->alignment_sign == '+')
 	{
-		if (!sign && (flag->plus_sign || flag->invisible_sign) && (flag->signal == 'i' || flag->signal == 'd'))
+		if (!sign && (flag->plus_sign || flag->invisible_sign) \
+		&& (flag->signal == 'i' || flag->signal == 'd'))
 			flag->alignment_total_spaces--;
 		if (sign)
 			flag->alignment_total_spaces--;
 		while (flag->alignment_total_spaces-- > (lenght + number_zeros))
 			ft_putchar_fd(' ', 1, flag);
 	}
-	if (!sign && flag->invisible_sign && (flag->signal == 'i' || flag->signal == 'd'))
+	if (!sign && flag->invisible_sign \
+	&& (flag->signal == 'i' || flag->signal == 'd'))
 		ft_putchar_fd(' ', 1, flag);
-	if (!sign && flag->plus_sign && (flag->signal == 'i' || flag->signal == 'd'))
+	if (!sign && flag->plus_sign \
+	&& (flag->signal == 'i' || flag->signal == 'd'))
 		ft_putchar_fd('+', 1, flag);
 }
 

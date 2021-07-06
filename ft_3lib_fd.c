@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 10:02:57 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 13:28:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:32:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ void	ft_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag)
 		ft_pointer_fd(x / ft_strlen(base), base, fd, flag);
 		ft_putchar_fd(base[x % ft_strlen(base)], fd, flag);
 	}
+}
+
+/** STRUCTURE of printf
+ * %[parameter][flags][width][.precision][length]type
+ * */
+void	advance_string(char **str, char *new_position)
+{
+	if (new_position)
+		*str = new_position;
 }

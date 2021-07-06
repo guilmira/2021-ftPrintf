@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/05 14:52:08 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:37:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,7 @@ void	print_hexa(unsigned int hexa, t_flag *flag, char *base, char *prefix)
 	{
 		ft_putstr_fd(prefix, 1, flag);
 		if (flag->precision_total_digits < flag->zerofilled_total_digits)
-		{
 			number_zeros -= 2;
-
-		}
 		flag->alignment_total_spaces -= 2;
 	}
 	print_end(number_zeros, lenght, str, flag);

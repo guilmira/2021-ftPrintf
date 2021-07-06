@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:32:40 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 13:32:33 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:28:24 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_count_digits_unsigned(unsigned int n)
 
 /** PURPOSE : writes integer in allocated memory [recursive].
  * 1. A static int variable is defined. It will maintain its value.
- * 2. If the number is not a single digits, recurssion.
+ * 2. If the number is not a single digit, recurssion.
  * 3. It will eventually reach the first digit. (from 643, it will get to '6')
  * 4. Converts the first digit to a string in position i = 0;
  * 5. Converts the rest of the digits in position i = 1, i = 2...

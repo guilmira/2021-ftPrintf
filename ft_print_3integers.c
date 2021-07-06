@@ -6,11 +6,23 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/05 13:35:29 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:46:12 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	analyze_sign(int number_zeros, t_flag *flag)
+{
+	ft_putchar_fd('-', 1, flag);
+	if (flag->alignment_total_spaces > 0)
+		flag->alignment_total_spaces--;
+	if (number_zeros > 0 \
+	&& flag->precision_total_digits <= flag->alignment_total_spaces \
+	&& flag->precision_total_digits < flag->zerofilled_total_digits)
+		number_zeros--;
+	return (number_zeros);
+}
 
 /** PURPOSE : to output number of zeros that must be printed
  *	1. Check all the conditions for zerofilled and precision
@@ -73,17 +85,10 @@ void	print_integer(int integer, t_flag *flag)
 		number_zeros = flag->zerofilled_total_digits - lenght;
 	left_align_int(sign, lenght, number_zeros, flag);
 	if (sign)
-	{
-		ft_putchar_fd('-', 1, flag);
-		if (flag->alignment_total_spaces > 0)
-			flag->alignment_total_spaces--;
-		if (number_zeros > 0 \
-		&& flag->precision_total_digits <= flag->alignment_total_spaces \
-		&& flag->precision_total_digits < flag->zerofilled_total_digits)
-			number_zeros--;
-	}
-	if ((flag->plus_sign || flag->invisible_sign) && (flag->signal == 'i' || flag->signal == 'd')  && \
-	flag->precision_total_digits <= lenght && !sign)
+		number_zeros = analyze_sign(number_zeros, flag);
+	if ((flag->plus_sign || flag->invisible_sign) \
+	&& (flag->signal == 'i' || flag->signal == 'd') \
+	&& flag->precision_total_digits <= lenght && !sign)
 		number_zeros--;
 	if ((flag->plus_sign || flag->invisible_sign) && !sign)
 		flag->alignment_total_spaces--;

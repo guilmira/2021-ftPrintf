@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/05 15:29:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:34:10 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# define CONVERTERS "idcspuxX%"
+# define CONVERTERS "%idcspuxX"
 # define HEXADECIMAL "0123456789abcdef"
 # define HEXADECIMAL_MAYUS "0123456789ABCDEF"
 # define PREFIX "0x"
 # define PREFIX_MAYUS "0X"
-
-# include <stdio.h>
 
 typedef struct s_flags
 {
@@ -36,7 +34,6 @@ typedef struct s_flags
 	int		invisible_sign;
 	int		plus_sign;
 	int		alternative;
-	int		l;
 	int		counter;
 }			t_flag;
 
@@ -57,25 +54,23 @@ char	*ft_strdup(const char *s1);
 void	ft_putstr_fd(char *s, int fd, t_flag *flag);
 void	ft_putchar_fd(char c, int fd, t_flag *flag);
 void	ft_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
+void	advance_string(char **str, char *new_position);
 /** Manipulate_numbers */
 int		get_number_from_string(char *number);
 int		ft_count_digits(int n);
 int		ft_count_digits_unsigned(unsigned int n);
 char	*ft_itoa(int n);
-/** Utils */
+/** Tools */
 void	init_flag(t_flag *flag);
-
 void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag);
 void	print_end(int number_zeros, int lenght, char *str, t_flag *flag);
 int		check_flag_zerofilled(t_flag *flag, int lenght);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
 /** Printf format */
-char	*get_flag_string(char *str);
 void	get_flags(char *str, t_flag *flag, va_list x);
 void	get_allignment(char *str, t_flag *flag, va_list x);
 void	get_precision(char *str, t_flag *flag, va_list x);
-void	advance_string(char **str, char *new_position);
+char	*get_flag_string(char *str);
 /** Printf prints */
 void	print_char(int c, t_flag *flag);
 void	print_string(char *str, t_flag *flag);
@@ -83,7 +78,5 @@ void	print_pointer(unsigned long long n, t_flag *flag);
 void	print_integer(int integer, t_flag *flag);
 void	print_integer_unsigned(unsigned int unsig, t_flag *flag);
 void	print_hexa(unsigned int hexa, t_flag *flag, char *base, char *prefix);
-void	print_long(long long long_int, t_flag *flag);
-
 
 #endif

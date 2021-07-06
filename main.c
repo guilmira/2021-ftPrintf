@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:16:41 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/05 15:19:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/05 16:00:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	main(void)
 {
-	char *s = "%ld\n";
 	int t = printf(s, 1);
 	int j = ft_printf(s, 1);
 	ft_printf("%i\n", t);

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/05 13:05:00 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:49:56 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /** STRUCTURE of printf
  * %[parameter][flags][width][.precision][length]type
+ * Evaluates the followinf flags:
+ * '.' // '#' // '+' // '-' // ' ' // '0' // '*'
  * */
 void	get_flags(char *str, t_flag *flag, va_list x)
 {
@@ -95,15 +97,6 @@ void	get_precision(char *str, t_flag *flag, va_list x)
 		flag->precision = -1;
 	if (flag->precision_total_digits < 0)
 		flag->precision = 0;
-}
-
-/** STRUCTURE of printf
- * %[parameter][flags][width][.precision][length]type
- * */
-void	advance_string(char **str, char *new_position)
-{
-	if (new_position)
-		*str = new_position;
 }
 
 /** PURPOSE : gets a string that only contains format values.
