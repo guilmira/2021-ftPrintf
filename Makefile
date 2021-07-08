@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/07/06 13:52:46 by guilmira         ###   ########.fr        #
+#    Updated: 2021/07/08 12:56:20 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ ft_print_1strings.c ft_print_2pointers.c ft_print_3integers.c ft_print_4integers
 ft_1lib_memorybasics.c ft_2lib_complexstrings.c ft_3lib_fd.c ft_4lib_manipulatenumbers.c
 
 OBJS = $(SRCS:.c=.o)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
