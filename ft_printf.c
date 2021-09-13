@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/06 08:23:51 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/13 17:20:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 /** PURPOSE : print variable on screen.
  * 1. Takes into account the details of the flag and converter.
- * 2. Selects function.
- * */
+ * 2. Selects function. */
 static void	variable_printer(t_flag *flag, va_list x)
 {
 	int	lenght;
@@ -42,8 +41,7 @@ static void	variable_printer(t_flag *flag, va_list x)
 
 /** PURPOSE : identifies the signal previous to the converter.
  * 1. Iterative on the flag while is not converter (i. e: i, d, s, c ...)
- * 2. Registers in struct flag details.
- * */
+ * 2. Registers in struct flag details. */
 static void	identify_flag(char *str, t_flag *flag, va_list x)
 {
 	char	*precision;
@@ -63,8 +61,7 @@ static void	identify_flag(char *str, t_flag *flag, va_list x)
 /** PURPOSE : to read the string passed as an argument and identify flag.
  * 1. Reads the string and prints single characters.
  * 2. Stops at '%'
- * 3. Applies 'identify_flag' to obtain flag details.
- * */
+ * 3. Applies 'identify_flag' to obtain flag details. */
 static void	read_mainstring(char **str, t_flag *flag, va_list x)
 {
 	int		i;
@@ -98,8 +95,7 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
  * Recieves a varying number of arguments and types. Then prints. Iterative.
  * 1. Read argument.
  * 2. Define the flag and identify converter.
- * 3. Print the argument.
- * */
+ * 3. Print the argument. */
 int	ft_printf(const char *c, ...)
 {
 	va_list	x;
