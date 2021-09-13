@@ -6,7 +6,7 @@
 #    By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/12 08:51:50 by guilmira          #+#    #+#              #
-#    Updated: 2021/09/13 16:56:59 by guilmira         ###   ########.fr        #
+#    Updated: 2021/09/13 17:22:27 by guilmira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME = libftprintf.a
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
+INCLUDES	= -I ./0includes
 #-g3 -fsanitize=address
 #--------------------------------------------------------------------------------------------------------------SOURCES
 SRCS = ft_printf.c ft_printf_tools_flag.c ft_printf_format.c \
