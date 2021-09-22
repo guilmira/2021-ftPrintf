@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/22 12:17:22 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:17:54 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ int	check_flag_zerofilled(t_flag *flag, int lenght)
 }
 
 /** PURPOSE : compares strings up to n char
- * Returns character difference.
- */
+ * Returns character difference. */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
