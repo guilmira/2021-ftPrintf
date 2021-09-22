@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/06 08:29:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:17:22 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag)
 }
 
 /** PURPOSE : print end part for %d, %i and %u
- * Used in functions print_integer and print_unsigned.
- */
+ * Used in functions print_integer and print_unsigned. */
 void	print_end(int number_zeros, int lenght, char *str, t_flag *flag)
 {
 	while (number_zeros > 0)
