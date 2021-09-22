@@ -6,15 +6,14 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 12:35:16 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 15:23:43 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:19:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /** PURPOSE : to print number of zeros
- *	1. Check all the conditions for zerofilled
- * */
+ *	1. Check all the conditions for zerofilled */
 static void	print_zeros_char(t_flag *flag)
 {
 	int	number_zeros;
@@ -31,8 +30,7 @@ static void	print_zeros_char(t_flag *flag)
 }
 
 /** PURPOSE : prints %c converter
- * Takes into account: Alignment
- * */
+ * Takes into account: Alignment */
 void	print_char(int c, t_flag *flag)
 {
 	print_zeros_char(flag);
@@ -58,8 +56,7 @@ void	print_char(int c, t_flag *flag)
 }
 
 /** PURPOSE : prints %s converter
- * Takes into account: Alignment, precision
- * */
+ * Takes into account: Alignment, precision */
 void	print_string(char *str, t_flag *flag)
 {
 	int	lenght;

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/06 08:46:12 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:19:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static int	analyze_sign(int number_zeros, t_flag *flag)
 }
 
 /** PURPOSE : to output number of zeros that must be printed
- *	1. Check all the conditions for zerofilled and precision
- * */
+ *	1. Check all the conditions for zerofilled and precision */
 static int	check_zeros_n_precision(t_flag *flag, int lenght)
 {
 	if (flag->zerofilled)
@@ -40,8 +39,7 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 	}
 }
 
-/** PURPOSE : evaluates integer and converts it to string.
- * */
+/** PURPOSE : evaluates integer and converts it to string. */
 static int	init_int(int integer, char **str, int *lenght, t_flag *flag)
 {
 	int	sign;
@@ -69,8 +67,7 @@ static int	init_int(int integer, char **str, int *lenght, t_flag *flag)
 }
 
 /** PURPOSE : prints %i and %d converter
- * Takes into account: Alignment, precision, zero filled
- * */
+ * Takes into account: Alignment, precision, zero filled */
 void	print_integer(int integer, t_flag *flag)
 {
 	int		lenght;

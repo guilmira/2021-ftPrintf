@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 13:45:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:19:14 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static void	itoa_writer_unsigned(unsigned int n, char *ptr)
 
 /** PURPOSE : converts integer into its string equivalent.
  * 1. Allocates memory in heap.
- * 2. Calls static function itoa-writer.
- * */
+ * 2. Calls static function itoa-writer. */
 static char	*ft_itoa_unsigned(unsigned int n)
 {
 	char	*ptr;
@@ -40,8 +39,7 @@ static char	*ft_itoa_unsigned(unsigned int n)
 }
 
 /** PURPOSE : to output number of zeros that must be printed
- *	1. Check all the conditions for zerofilled and precision
- * */
+ *	1. Check all the conditions for zerofilled and precision */
 static int	check_zeros_n_precision(t_flag *flag, int lenght)
 {
 	if (flag->zerofilled)
@@ -55,8 +53,7 @@ static int	check_zeros_n_precision(t_flag *flag, int lenght)
 	}
 }
 
-/** PURPOSE : evaluates integer and converts it to string.
- * */
+/** PURPOSE : evaluates integer and converts it to string. */
 static void	init_unsig(unsigned int unsig, char **str, \
 int *lenght, t_flag *flag)
 {
@@ -71,8 +68,7 @@ int *lenght, t_flag *flag)
 }
 
 /** PURPOSE : prints %i and %d converter
- * Takes into account: Alignment, precision, zero filled
- * */
+ * Takes into account: Alignment, precision, zero filled */
 void	print_integer_unsigned(unsigned int unsig, t_flag *flag)
 {
 	int		lenght;

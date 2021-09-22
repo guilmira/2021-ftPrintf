@@ -6,22 +6,20 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 12:31:24 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/04 13:28:52 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:19:38 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/** PURPOSE : prints necessary left spaces for hexadecimal converter
- * */
+/** PURPOSE : prints necessary left spaces for hexadecimal converter */
 static void	print_left_allignment(int lenght_of_hexadecimal, t_flag *flag)
 {
 	while (flag->alignment_total_spaces-- > lenght_of_hexadecimal + 2)
 		ft_putchar_fd(' ', 1, flag);
 }
 
-/** PURPOSE : prints necessary right spaces for hexadecimal converter
- * */
+/** PURPOSE : prints necessary right spaces for hexadecimal converter */
 static void	print_right_allignment(int lenght_of_hexadecimal, t_flag *flag)
 {
 	while (flag->alignment_total_spaces-- > lenght_of_hexadecimal + 2)
@@ -29,8 +27,7 @@ static void	print_right_allignment(int lenght_of_hexadecimal, t_flag *flag)
 }
 
 /** PURPOSE : prints %p, %x and %X converter
- * Takes into account: Alignment
- * */
+ * Takes into account: Alignment */
 void	print_pointer(unsigned long long n, t_flag *flag)
 {
 	int						lenght_of_hexadecimal;
