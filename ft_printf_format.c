@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:33:29 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/06 08:49:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:23:26 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 /** STRUCTURE of printf
  * %[parameter][flags][width][.precision][length]type
  * Evaluates the followinf flags:
- * '.' // '#' // '+' // '-' // ' ' // '0' // '*'
- * */
+ * '.' // '#' // '+' // '-' // ' ' // '0' // '*' */
 void	get_flags(char *str, t_flag *flag, va_list x)
 {
 	int	i;
@@ -55,8 +54,7 @@ static void	correct_alignment(t_flag *flag)
 
 /** STRUCTURE of printf
  * %[parameter][flags][width][.precision][length]type
- * Width and allignment are synonyms
- * */
+ * Width and allignment are synonyms */
 void	get_allignment(char *str, t_flag *flag, va_list x)
 {
 	int	i;
@@ -100,8 +98,7 @@ void	get_precision(char *str, t_flag *flag, va_list x)
 }
 
 /** PURPOSE : gets a string that only contains format values.
- * Format values are contained between % and converter [i. e: d, s, i...]
- * */
+ * Format values are contained between % and converter [i. e: d, s, i...] */
 char	*get_flag_string(char *str)
 {
 	if (ft_strchr_plus(str, CONVERTERS))

@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 12:31:24 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/22 12:19:38 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:16:42 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 static void	print_left_allignment(int lenght_of_hexadecimal, t_flag *flag)
 {
 	while (flag->alignment_total_spaces-- > lenght_of_hexadecimal + 2)
-		ft_putchar_fd(' ', 1, flag);
+		pf_putchar_fd(' ', 1, flag);
 }
 
 /** PURPOSE : prints necessary right spaces for hexadecimal converter */
 static void	print_right_allignment(int lenght_of_hexadecimal, t_flag *flag)
 {
 	while (flag->alignment_total_spaces-- > lenght_of_hexadecimal + 2)
-		ft_putchar_fd(' ', 1, flag);
+		pf_putchar_fd(' ', 1, flag);
 }
 
 /** PURPOSE : prints %p, %x and %X converter
@@ -42,8 +42,8 @@ void	print_pointer(unsigned long long n, t_flag *flag)
 	}
 	if (flag->alignment && flag->alignment_sign == '+')
 		print_left_allignment(lenght_of_hexadecimal, flag);
-	ft_putstr_fd("0x", 1, flag);
-	ft_pointer_fd(n, HEXADECIMAL, 1, flag);
+	pf_putstr_fd("0x", 1, flag);
+	pf_pointer_fd(n, HEXADECIMAL, 1, flag);
 	if (flag->alignment_sign == '-')
 		print_right_allignment(lenght_of_hexadecimal, flag);
 }

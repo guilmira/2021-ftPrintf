@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 12:35:16 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/22 12:19:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:17:28 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_zeros_char(t_flag *flag)
 	{
 		while (number_zeros > 0)
 		{
-			ft_putchar_fd('0', 1, flag);
+			pf_putchar_fd('0', 1, flag);
 			number_zeros--;
 		}
 	}
@@ -39,17 +39,17 @@ void	print_char(int c, t_flag *flag)
 		flag->alignment_total_spaces--;
 		while (flag->alignment_total_spaces)
 		{
-			ft_putchar_fd(' ', 1, flag);
+			pf_putchar_fd(' ', 1, flag);
 			flag->alignment_total_spaces--;
 		}
 	}
-	ft_putchar_fd(c, 1, flag);
+	pf_putchar_fd(c, 1, flag);
 	if (flag->alignment && flag->alignment_sign == '-')
 	{
 		flag->alignment_total_spaces--;
 		while (flag->alignment_total_spaces)
 		{
-			ft_putchar_fd(' ', 1, flag);
+			pf_putchar_fd(' ', 1, flag);
 			flag->alignment_total_spaces--;
 		}
 	}
@@ -70,14 +70,14 @@ void	print_string(char *str, t_flag *flag)
 		lenght = flag->precision_total_digits;
 	if (flag->alignment && flag->alignment_sign == '+')
 		while (flag->alignment_total_spaces-- > lenght)
-			ft_putchar_fd(' ', 1, flag);
+			pf_putchar_fd(' ', 1, flag);
 	if (!(flag->precision))
-		ft_putstr_fd(str, 1, flag);
+		pf_putstr_fd(str, 1, flag);
 	else
 		while (flag->precision_total_digits-- > 0)
 			if (str[i])
-				ft_putchar_fd(str[i++], 1, flag);
+				pf_putchar_fd(str[i++], 1, flag);
 	if (flag->alignment && flag->alignment_sign == '-')
 		while (flag->alignment_total_spaces-- > lenght)
-			ft_putchar_fd(' ', 1, flag);
+			pf_putchar_fd(' ', 1, flag);
 }

@@ -6,12 +6,13 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/07/06 08:34:10 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:13:46 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
@@ -38,34 +39,19 @@ typedef struct s_flags
 }			t_flag;
 
 int		ft_printf(const char *c, ...);
-/** Memory basics */
-void	*ft_memset(void *b, int c, size_t len);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t count, size_t size);
-size_t	ft_strlen(const char *s);
-int		ft_isdigit(int c);
-/** Complex strings */
-char	*ft_strchr(const char *s, int c);
-char	*ft_strchr_plus(char *str, char *letters);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-int		ft_atoi(const char *str);
-char	*ft_strdup(const char *s1);
 /** Fd management */
-void	ft_putstr_fd(char *s, int fd, t_flag *flag);
-void	ft_putchar_fd(char c, int fd, t_flag *flag);
-void	ft_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
+void	pf_putstr_fd(char *s, int fd, t_flag *flag);
+void	pf_putchar_fd(char c, int fd, t_flag *flag);
+void	pf_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
 void	advance_string(char **str, char *new_position);
 /** Manipulate_numbers */
 int		get_number_from_string(char *number);
-int		ft_count_digits(int n);
 int		ft_count_digits_unsigned(unsigned int n);
-char	*ft_itoa(int n);
 /** Tools */
 void	init_flag(t_flag *flag);
 void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag);
 void	print_end(int number_zeros, int lenght, char *str, t_flag *flag);
 int		check_flag_zerofilled(t_flag *flag, int lenght);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 /** Printf format */
 void	get_flags(char *str, t_flag *flag, va_list x);
 void	get_allignment(char *str, t_flag *flag, va_list x);

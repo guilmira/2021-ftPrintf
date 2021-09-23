@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:07:07 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/22 12:19:26 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:14:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	analyze_sign(int number_zeros, t_flag *flag)
 {
-	ft_putchar_fd('-', 1, flag);
+	pf_putchar_fd('-', 1, flag);
 	if (flag->alignment_total_spaces > 0)
 		flag->alignment_total_spaces--;
 	if (number_zeros > 0 \

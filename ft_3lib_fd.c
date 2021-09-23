@@ -6,24 +6,24 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 10:02:57 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/22 12:19:56 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:15:25 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd, t_flag *flag)
+void	pf_putstr_fd(char *s, int fd, t_flag *flag)
 {
 	if (s)
 		flag->counter += write(fd, s, ft_strlen(s));
 }
 
-void	ft_putchar_fd(char c, int fd, t_flag *flag)
+void	pf_putchar_fd(char c, int fd, t_flag *flag)
 {
 	flag->counter += write(fd, &c, sizeof(char));
 }
 
-void	ft_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag)
+void	pf_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag)
 {
 	int					i;
 	unsigned long long	x;
@@ -37,11 +37,11 @@ void	ft_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag)
 			return ;
 	x = n;
 	if (x / ft_strlen(base) == 0)
-		ft_putchar_fd(base[x % ft_strlen(base)], fd, flag);
+		pf_putchar_fd(base[x % ft_strlen(base)], fd, flag);
 	else
 	{
-		ft_pointer_fd(x / ft_strlen(base), base, fd, flag);
-		ft_putchar_fd(base[x % ft_strlen(base)], fd, flag);
+		pf_pointer_fd(x / ft_strlen(base), base, fd, flag);
+		pf_putchar_fd(base[x % ft_strlen(base)], fd, flag);
 	}
 }
 

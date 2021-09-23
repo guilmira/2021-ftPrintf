@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:53:22 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/22 12:17:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:23:33 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	left_align_int(int sign, int lenght, int number_zeros, t_flag *flag)
 		if (sign)
 			flag->alignment_total_spaces--;
 		while (flag->alignment_total_spaces-- > (lenght + number_zeros))
-			ft_putchar_fd(' ', 1, flag);
+			pf_putchar_fd(' ', 1, flag);
 	}
 	if (!sign && flag->invisible_sign \
 	&& (flag->signal == 'i' || flag->signal == 'd'))
-		ft_putchar_fd(' ', 1, flag);
+		pf_putchar_fd(' ', 1, flag);
 	if (!sign && flag->plus_sign \
 	&& (flag->signal == 'i' || flag->signal == 'd'))
-		ft_putchar_fd('+', 1, flag);
+		pf_putchar_fd('+', 1, flag);
 }
 
 /** PURPOSE : print end part for %d, %i and %u
@@ -55,22 +55,21 @@ void	print_end(int number_zeros, int lenght, char *str, t_flag *flag)
 {
 	while (number_zeros > 0)
 	{
-		ft_putchar_fd('0', 1, flag);
+		pf_putchar_fd('0', 1, flag);
 		number_zeros--;
 		lenght++;
 	}
 	if (!ft_strncmp("0", str, 1) && flag->precision == -1)
 		;
 	else
-		ft_putstr_fd(str, 1, flag);
+		pf_putstr_fd(str, 1, flag);
 	if (flag->alignment && flag->alignment_sign == '-')
 		while (flag->alignment_total_spaces-- - lenght > 0)
-			ft_putchar_fd(' ', 1, flag);
+			pf_putchar_fd(' ', 1, flag);
 }
 
 /** PURPOSE : to output number of zeros
- *	1. Check all the conditions in case zerofilled exists
- * */
+ *	1. Check all the conditions in case zerofilled exists */
 int	check_flag_zerofilled(t_flag *flag, int lenght)
 {
 	if (flag->zerofilled_total_digits < 0)
@@ -95,20 +94,4 @@ int	check_flag_zerofilled(t_flag *flag, int lenght)
 		else
 			return (0);
 	}
-}
-
-/** PURPOSE : compares strings up to n char
- * Returns character difference. */
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i] || !s1[i])
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
-		i++;
-	}
-	return (0);
 }

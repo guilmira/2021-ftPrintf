@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/13 17:20:54 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:18:32 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	read_mainstring(char **str, t_flag *flag, va_list x)
 		if ((*str)[i] == '%')
 			break ;
 		else
-			ft_putchar_fd((*str)[i], 1, flag);
+			pf_putchar_fd((*str)[i], 1, flag);
 	}
 	if ((*str)[i] == '%' && ft_strchr_plus(&(*str)[i + 1], CONVERTERS))
 	{
