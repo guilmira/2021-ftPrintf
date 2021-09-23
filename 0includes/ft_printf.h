@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:29:19 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/23 08:13:46 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:42:03 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		ft_printf(const char *c, ...);
 void	pf_putstr_fd(char *s, int fd, t_flag *flag);
 void	pf_putchar_fd(char c, int fd, t_flag *flag);
 void	pf_pointer_fd(unsigned long long n, char *base, int fd, t_flag *flag);
-void	advance_string(char **str, char *new_position);
 /** Manipulate_numbers */
 int		get_number_from_string(char *number);
 int		ft_count_digits_unsigned(unsigned int n);

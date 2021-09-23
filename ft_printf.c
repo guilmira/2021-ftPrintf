@@ -6,7 +6,7 @@
 /*   By: guilmira <guilmira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 08:46:55 by guilmira          #+#    #+#             */
-/*   Updated: 2021/09/23 08:18:32 by guilmira         ###   ########.fr       */
+/*   Updated: 2021/09/23 08:33:02 by guilmira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ static void	identify_flag(char *str, t_flag *flag, va_list x)
 	precision = ft_strchr(str, '.');
 	if (precision)
 		get_precision(++precision, flag, x);
+}
+
+/** STRUCTURE PF = %[parameter][flags][width][.precision][length]type */
+static void	advance_string(char **str, char *new_position)
+{
+	if (new_position)
+		*str = new_position;
 }
 
 /** PURPOSE : to read the string passed as an argument and identify flag.
